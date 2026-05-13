@@ -3,901 +3,669 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TN BOX — Programación profesional para boxes de entrenamiento funcional</title>
+<title>Programación para Boxes – Soporte 24/7 | Training Norte</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
   :root {
     --bg: #ffffff;
-    --bg-2: #f5f5f3;
-    --bg-3: #ebebe8;
-    --bg-dark: #0a0a0a;
-    --bg-dark-2: #161614;
+    --bg-2: #f7f7f5;
+    --bg-3: #efefec;
     --fg: #0a0a0a;
-    --fg-dim: #525252;
-    --fg-mute: #8a8a87;
-    --fg-on-dark: #f8f8f6;
-    --fg-on-dark-dim: #b5b5b1;
-    --line: #e5e5e2;
-    --line-dark: #2a2a27;
+    --fg-dim: #555550;
+    --fg-mute: #9a9a95;
+    --line: #e8e8e4;
     --accent: #F3C148;
-    --accent-soft: #fff5d6;
+    --accent-dark: #d9a82e;
     --accent-fg: #0a0a0a;
-    --radius: 6px;
-    --maxw: 1280px;
+    --dark: #0a0a0a;
+    --radius: 4px;
+    --maxw: 1200px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: var(--bg); color: var(--fg); font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  html, body { background: var(--bg); color: var(--fg); font-family: "Montserrat", sans-serif; -webkit-font-smoothing: antialiased; }
   body { overflow-x: hidden; }
-  .display { font-family: "Montserrat", sans-serif; font-weight: 900; letter-spacing: -0.025em; line-height: 0.98; text-transform: uppercase; padding-bottom: 0.06em; }
-  .display + p, .display + .sub, .display + .lead { margin-top: 28px !important; }
-  .mono { font-family: "JetBrains Mono", "Menlo", monospace; }
-  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
   a { color: inherit; text-decoration: none; }
   button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
   img { display: block; max-width: 100%; }
   ::selection { background: var(--accent); color: var(--accent-fg); }
 
-  .eyebrow { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg); display: inline-flex; align-items: center; gap: 8px; }
-  .eyebrow::before { content: ""; display: block; width: 24px; height: 2px; background: var(--accent); }
-  .eyebrow.on-dark { color: var(--fg-on-dark); }
-  .eyebrow.on-yellow::before { background: var(--accent-fg); }
+  .mono { font-family: "JetBrains Mono", monospace; }
+  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
+  @media (max-width: 720px) { .container { padding: 0 20px; } }
 
-  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px; font-weight: 700; font-size: 15px; letter-spacing: 0.01em; border-radius: var(--radius); transition: transform .15s ease, background .15s ease, color .15s ease, box-shadow .15s ease; border: 2px solid transparent; }
-  .btn:hover { transform: translateY(-1px); }
-  .btn-primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); box-shadow: 0 8px 0 0 rgba(10,10,10,0.08); }
-  .btn-primary:hover { background: #ffd363; border-color: #ffd363; box-shadow: 0 4px 0 0 rgba(10,10,10,0.12); }
-  .btn-dark { background: var(--bg-dark); color: var(--fg-on-dark); border-color: var(--bg-dark); }
-  .btn-dark:hover { background: #1f1f1c; border-color: #1f1f1c; }
-  .btn-ghost { background: transparent; color: var(--fg); border: 2px solid var(--line); }
-  .btn-ghost:hover { border-color: var(--fg); }
-  .btn-ghost.on-dark { color: var(--fg-on-dark); border-color: var(--line-dark); }
-  .btn-ghost.on-dark:hover { border-color: var(--fg-on-dark); }
+  .eyebrow { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-mute); display: inline-flex; align-items: center; gap: 10px; }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--accent-dark); }
+
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 28px; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; border-radius: var(--radius); transition: all .18s ease; border: 2px solid transparent; }
+  .btn-accent { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  .btn-accent:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+  .btn-outline { background: transparent; color: var(--fg); border-color: var(--fg); }
+  .btn-outline:hover { background: var(--fg); color: var(--bg); }
+  .btn-white { background: var(--bg); color: var(--fg); border-color: var(--bg); }
+  .btn-white:hover { background: var(--accent); border-color: var(--accent); }
   .arrow { transition: transform .2s ease; display: inline-block; }
-  .btn:hover .arrow { transform: translateX(3px); }
+  .btn:hover .arrow { transform: translateX(4px); }
 
   /* Promo bar */
-  .promo-bar { background: var(--bg-dark); color: var(--fg-on-dark); text-align: center; padding: 10px 24px; font-size: 13px; font-weight: 500; letter-spacing: 0.01em; }
-  .promo-bar strong { color: var(--accent); font-weight: 700; }
+  .promo { background: var(--accent); color: var(--accent-fg); text-align: center; padding: 9px 24px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
 
   /* Nav */
-  nav.top {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  nav.top .inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: var(--maxw); margin: 0 auto; gap: 24px; }
-  .logo { display: flex; align-items: center; gap: 12px; font-weight: 900; text-transform: uppercase; font-size: 18px; letter-spacing: 0.04em; }
-  .logo-img { width: 44px; height: 44px; background: var(--bg-dark); border-radius: 50%; padding: 4px; display: grid; place-items: center; }
-  .logo-img img { width: 100%; height: 100%; object-fit: contain; }
-  .nav-links { display: flex; gap: 28px; font-size: 13px; font-weight: 600; color: var(--fg-dim); }
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+  nav .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 32px; }
+  @media (max-width: 720px) { nav .nav-inner { padding: 0 20px; } }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo-img { width: 40px; height: 40px; background: var(--dark); border-radius: 50%; padding: 4px; display: grid; place-items: center; }
+  .nav-logo-img img { width: 100%; object-fit: contain; }
+  .nav-links { display: flex; gap: 32px; font-size: 13px; font-weight: 600; color: var(--fg-dim); letter-spacing: 0.01em; }
   .nav-links a:hover { color: var(--fg); }
   @media (max-width: 900px) { .nav-links { display: none; } }
 
-  /* Hero */
-  .hero { position: relative; overflow: hidden; background: var(--bg-dark); color: var(--fg-on-dark); }
-  .hero::before {
-    content: ""; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 60% at 80% 30%, rgba(243,193,72,0.15) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .hero-inner { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; padding: 88px 24px 96px; max-width: var(--maxw); margin: 0 auto; align-items: center; position: relative; z-index: 1; }
-  @media (max-width: 980px) { .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 56px 24px 64px; } }
-  .hero h1 { font-size: clamp(46px, 6.8vw, 92px); margin-top: 22px; }
-  .hero h1 .accent { color: var(--accent); }
-  .hero .sub { margin-top: 28px; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.55; color: var(--fg-on-dark-dim); max-width: 560px; }
+  /* ─── HERO ─── */
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; }
+  .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.55) 50%, rgba(10,10,10,0.2) 100%); }
+  .hero-content { position: relative; z-index: 1; width: 100%; padding: 0 40px 80px; max-width: var(--maxw); margin: 0 auto; }
+  @media (max-width: 720px) { .hero-content { padding: 0 20px 60px; } }
+  .hero-content .eyebrow { color: rgba(255,255,255,0.6); }
+  .hero-content .eyebrow::before { background: var(--accent); }
+  .hero h1 { font-size: clamp(48px, 6.5vw, 96px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: #fff; margin-top: 20px; max-width: 900px; }
+  .hero h1 strong { font-weight: 900; }
+  .hero h1 .hi { color: var(--accent); font-weight: 900; }
+  .hero-sub { margin-top: 24px; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.65); max-width: 520px; font-weight: 400; }
   .hero-ctas { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
-  .hero-trust { margin-top: 44px; display: flex; gap: 32px; flex-wrap: wrap; align-items: center; }
-  .hero-trust .stat { display: flex; flex-direction: column; gap: 4px; }
-  .hero-trust .stat .num { font-weight: 900; font-size: 34px; color: var(--accent); line-height: 1; letter-spacing: -0.02em; }
-  .hero-trust .stat .lbl { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-on-dark-dim); }
-  .hero-trust .divider { width: 1px; height: 40px; background: var(--line-dark); }
+  .hero-stats { margin-top: 56px; display: flex; gap: 0; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 36px; flex-wrap: wrap; }
+  .hero-stat { flex: 1; min-width: 140px; padding-right: 32px; border-right: 1px solid rgba(255,255,255,0.12); margin-right: 32px; }
+  .hero-stat:last-child { border-right: none; margin-right: 0; }
+  .hero-stat .n { font-size: clamp(36px, 4vw, 52px); font-weight: 900; color: var(--accent); line-height: 1; letter-spacing: -0.03em; }
+  .hero-stat .l { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 6px; }
 
-  .hero-visual { position: relative; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; }
-  .hero-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .hero-visual .frame { position: absolute; inset: 0; border: 1px solid rgba(243,193,72,0.3); border-radius: var(--radius); pointer-events: none; }
-  .hero-visual .badge {
-    position: absolute; bottom: 24px; left: 24px; right: 24px;
-    background: var(--accent); color: var(--accent-fg); padding: 16px 20px; border-radius: var(--radius);
-    display: flex; align-items: center; gap: 14px;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
-  }
-  .hero-visual .badge .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent-fg); animation: pulse 1.8s ease-in-out infinite; flex-shrink: 0; }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
-  .hero-visual .badge .txt { font-size: 13px; line-height: 1.3; }
-  .hero-visual .badge .txt strong { display: block; font-weight: 800; }
-  .hero-visual .badge .txt span { font-size: 12px; opacity: 0.8; }
+  /* ─── BOXES STRIP ─── */
+  .boxes-strip { background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 20px 40px; }
+  .boxes-strip-inner { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; justify-content: space-between; }
+  .boxes-strip .label { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-mute); white-space: nowrap; }
+  .boxes-strip .names { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; }
+  .boxes-strip .name { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-dim); }
 
-  /* Logo strip */
-  .strip { padding: 28px 24px; border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); background: var(--bg-dark); color: var(--fg-on-dark-dim); }
-  .strip-inner { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; justify-content: space-between; }
-  .strip .label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
-  .strip .label strong { color: var(--accent); font-weight: 600; }
-  .strip .logos { display: flex; gap: 36px; flex-wrap: wrap; align-items: center; }
-  .strip .logo-item { font-weight: 800; font-size: 16px; color: var(--fg-on-dark); letter-spacing: 0.02em; opacity: 0.65; text-transform: uppercase; }
+  /* ─── SECTION BASE ─── */
+  .section { padding: 112px 40px; }
+  @media (max-width: 720px) { .section { padding: 72px 20px; } }
+  .section-head { max-width: 680px; margin: 0 auto 72px; text-align: center; }
+  .section-head h2 { font-size: clamp(36px, 4.5vw, 60px); font-weight: 300; letter-spacing: -0.025em; line-height: 1.1; margin-top: 16px; }
+  .section-head h2 strong { font-weight: 900; }
+  .section-head .lead { margin-top: 20px; font-size: 17px; line-height: 1.65; color: var(--fg-dim); }
 
-  /* Section base */
-  section.block { padding: 100px 24px; }
-  @media (max-width: 720px) { section.block { padding: 64px 24px; } }
-  .block-head { max-width: 860px; margin: 0 auto 64px; text-align: center; }
-  .block-head .eyebrow { display: inline-flex; }
-  .block-head h2 { font-size: clamp(40px, 5.4vw, 68px); margin-top: 20px; }
-  .block-head .lead { margin-top: 24px; font-size: 17px; line-height: 1.6; color: var(--fg-dim); }
-  .block-head .lead.on-dark { color: var(--fg-on-dark-dim); }
+  /* ─── FEATURES ─── */
+  .features { background: var(--bg); }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); max-width: var(--maxw); margin: 0 auto; border: 1px solid var(--line); overflow: hidden; }
+  @media (max-width: 820px) { .features-grid { grid-template-columns: 1fr; } }
+  .feat { background: var(--bg); padding: 48px 40px; transition: background .2s; }
+  .feat:hover { background: var(--bg-2); }
+  .feat .f-num { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--fg-mute); font-weight: 500; }
+  .feat .f-line { width: 32px; height: 2px; background: var(--accent); margin: 16px 0; }
+  .feat .f-ttl { font-size: 22px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; margin-top: 0; }
+  .feat .f-desc { font-size: 14.5px; line-height: 1.7; color: var(--fg-dim); margin-top: 14px; }
 
-  /* Pain section */
-  .pain { background: var(--bg); }
-  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); max-width: var(--maxw); margin: 0 auto; border-radius: var(--radius); overflow: hidden; }
-  @media (max-width: 820px) { .pain-grid { grid-template-columns: 1fr; } }
-  .pain-card { background: var(--bg); padding: 40px 32px; min-height: 280px; display: flex; flex-direction: column; justify-content: space-between; transition: background .2s ease; }
-  .pain-card:hover { background: var(--bg-2); }
-  .pain-card .num { font-weight: 900; font-size: 60px; color: var(--accent); line-height: 1; letter-spacing: -0.04em; }
-  .pain-card .ttl { font-weight: 800; text-transform: none; font-size: 21px; line-height: 1.25; margin-top: 20px; letter-spacing: -0.01em; }
-  .pain-card .desc { color: var(--fg-dim); font-size: 14.5px; line-height: 1.6; margin-top: 12px; }
+  /* ─── SOLUTION ─── */
+  .solution { background: var(--bg-2); padding: 0; overflow: hidden; }
+  .solution-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 700px; }
+  @media (max-width: 880px) { .solution-split { grid-template-columns: 1fr; min-height: auto; } }
+  .solution-photo { position: relative; overflow: hidden; min-height: 480px; }
+  .solution-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .solution-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, transparent 65%, var(--bg-2) 100%); }
+  .solution-photo .photo-tag { position: absolute; bottom: 28px; left: 28px; z-index: 1; background: var(--accent); color: var(--accent-fg); padding: 7px 14px; font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .solution-body { padding: 96px 72px 96px 60px; display: flex; flex-direction: column; justify-content: center; }
+  @media (max-width: 880px) { .solution-body { padding: 56px 20px; } }
+  .solution-body h2 { font-size: clamp(30px, 3.6vw, 48px); font-weight: 300; letter-spacing: -0.02em; line-height: 1.15; margin-top: 14px; }
+  .solution-body h2 strong { font-weight: 900; }
+  .sol-items { margin-top: 40px; display: flex; flex-direction: column; }
+  .sol-item { display: flex; gap: 0; border-top: 1px solid var(--line); padding: 22px 0; transition: background .15s; }
+  .sol-item:last-child { border-bottom: 1px solid var(--line); }
+  .sol-item .si-mark { width: 28px; flex: 0 0 28px; margin-top: 2px; }
+  .sol-item .si-mark span { display: block; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; font-size: 11px; font-weight: 900; }
+  .sol-item .si-body .si-ttl { font-weight: 700; font-size: 16px; line-height: 1.25; }
+  .sol-item .si-body .si-desc { font-size: 13.5px; line-height: 1.6; color: var(--fg-dim); margin-top: 4px; }
 
-  /* Solution */
-  .solution { background: var(--bg-2); }
-  .solution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; max-width: var(--maxw); margin: 0 auto; }
-  @media (max-width: 880px) { .solution-grid { grid-template-columns: 1fr; gap: 40px; } }
-  .solution-img { aspect-ratio: 1/1; border-radius: var(--radius); overflow: hidden; position: relative; }
-  .solution-img img { width: 100%; height: 100%; object-fit: cover; }
-  .solution-img .tag { position: absolute; top: 20px; left: 20px; background: var(--accent); color: var(--accent-fg); padding: 8px 14px; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; }
-  .solution-bullets { margin-top: 32px; display: flex; flex-direction: column; gap: 22px; }
-  .bullet { display: flex; gap: 18px; align-items: flex-start; }
-  .bullet .icon { width: 36px; height: 36px; flex: 0 0 36px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; color: var(--accent-fg); font-weight: 900; font-size: 16px; }
-  .bullet .ttl { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
-  .bullet .desc { color: var(--fg-dim); font-size: 14.5px; line-height: 1.6; margin-top: 4px; }
-
-  /* Programs grid */
-  .programs { background: var(--bg-dark); color: var(--fg-on-dark); }
-  .programs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: var(--maxw); margin: 0 auto; }
+  /* ─── PROGRAMS ─── */
+  .programs { background: var(--bg); }
+  .programs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); max-width: var(--maxw); margin: 0 auto; overflow: hidden; }
   @media (max-width: 980px) { .programs-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 520px) { .programs-grid { grid-template-columns: 1fr; } }
-  .prog-card { background: var(--bg-dark-2); border: 1px solid var(--line-dark); padding: 26px; border-radius: var(--radius); position: relative; overflow: hidden; transition: border-color .2s ease, transform .2s ease, background .2s ease; }
-  .prog-card:hover { border-color: var(--accent); transform: translateY(-4px); background: #1c1c19; }
-  .prog-card .tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-  .prog-card .name { font-weight: 900; text-transform: uppercase; font-size: 24px; margin-top: 12px; letter-spacing: -0.01em; }
-  .prog-card .desc { color: var(--fg-on-dark-dim); font-size: 13.5px; line-height: 1.55; margin-top: 12px; }
-  .prog-card .corner { position: absolute; top: 22px; right: 22px; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+  @media (max-width: 520px) { .programs-grid { grid-template-columns: repeat(2, 1fr); } }
+  .prog { background: var(--bg); padding: 32px 28px; transition: background .2s; position: relative; overflow: hidden; }
+  .prog:hover { background: var(--bg-2); }
+  .prog::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+  .prog:hover::before { transform: scaleX(1); }
+  .prog .p-tag { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-mute); }
+  .prog .p-name { font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: -0.01em; margin-top: 10px; }
+  .prog .p-desc { font-size: 13px; line-height: 1.55; color: var(--fg-dim); margin-top: 8px; }
 
-  /* Steps */
-  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: var(--maxw); margin: 0 auto; }
-  @media (max-width: 880px) { .steps { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
-  .step { padding-top: 28px; border-top: 3px solid var(--accent); }
-  .step .num { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; color: var(--accent-fg); background: var(--accent); padding: 4px 10px; border-radius: 4px; display: inline-block; font-weight: 700; }
-  .step .ttl { font-weight: 800; text-transform: none; font-size: 22px; margin-top: 14px; line-height: 1.25; letter-spacing: -0.01em; }
-  .step .desc { color: var(--fg-dim); font-size: 14px; line-height: 1.6; margin-top: 12px; }
+  /* ─── HOW IT WORKS ─── */
+  .how { background: var(--dark); color: #fff; }
+  .how .section-head h2 { color: #fff; }
+  .how .section-head h2 strong { color: var(--accent); }
+  .how .section-head .lead { color: rgba(255,255,255,0.5); }
+  .how .section-head .eyebrow { color: rgba(255,255,255,0.4); }
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; max-width: var(--maxw); margin: 0 auto; border: 1px solid rgba(255,255,255,0.08); }
+  @media (max-width: 880px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .steps-grid { grid-template-columns: 1fr; } }
+  .step { padding: 40px 32px; border-right: 1px solid rgba(255,255,255,0.08); }
+  .step:last-child { border-right: none; }
+  @media (max-width: 880px) { .step:nth-child(2) { border-right: none; } }
+  .step .s-num { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.16em; color: var(--accent); font-weight: 600; }
+  .step .s-ttl { font-size: 20px; font-weight: 800; margin-top: 20px; line-height: 1.2; }
+  .step .s-desc { font-size: 13.5px; line-height: 1.65; color: rgba(255,255,255,0.45); margin-top: 10px; }
 
-  /* Testimonials */
-  .testimonials { background: var(--bg); }
-  .test-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: var(--maxw); margin: 0 auto; }
-  @media (max-width: 880px) { .test-grid { grid-template-columns: 1fr; } }
-  .test-card {
-    position: relative; background: var(--bg-dark); border-radius: var(--radius); overflow: hidden;
-    aspect-ratio: 16/10; cursor: pointer; transition: transform .25s ease;
-  }
-  .test-card:hover { transform: translateY(-3px); }
+  /* ─── VIDEO ─── */
+  .video-section { background: var(--dark); line-height: 0; }
+  .video-section video { width: 100%; display: block; max-height: 580px; object-fit: cover; }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials { background: var(--bg-2); }
+  .test-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: var(--maxw); margin: 0 auto; }
+  @media (max-width: 980px) { .test-grid { grid-template-columns: repeat(2, 1fr); } }
+  .test-card { position: relative; background: var(--dark); overflow: hidden; aspect-ratio: 9/16; cursor: pointer; transition: transform .25s ease; }
+  .test-card:hover { transform: translateY(-4px); }
   .test-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .test-card .overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(10,10,10,0) 30%, rgba(10,10,10,0.85) 100%);
-    pointer-events: none;
-    transition: opacity .25s ease;
-  }
+  .test-card .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,0) 40%, rgba(10,10,10,0.88) 100%); pointer-events: none; transition: opacity .25s; }
   .test-card.playing .overlay { opacity: 0; }
-  .test-card .play-btn {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 76px; height: 76px; border-radius: 50%; background: var(--accent); color: var(--accent-fg);
-    display: grid; place-items: center; transition: transform .2s ease, opacity .2s ease;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-    pointer-events: none;
-  }
-  .test-card:hover .play-btn { transform: translate(-50%, -50%) scale(1.08); }
+  .test-card .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; transition: transform .2s, opacity .2s; pointer-events: none; }
+  .test-card:hover .play-btn { transform: translate(-50%,-50%) scale(1.1); }
   .test-card.playing .play-btn { opacity: 0; }
-  .test-card .play-btn svg { width: 28px; height: 28px; margin-left: 4px; }
-  .test-card .meta {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 24px; color: var(--fg-on-dark);
-    transition: opacity .25s ease;
-  }
+  .test-card .play-btn svg { width: 22px; height: 22px; margin-left: 3px; fill: var(--accent-fg); }
+  .test-card .meta { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; color: #fff; transition: opacity .25s; }
   .test-card.playing .meta { opacity: 0; }
-  .test-card .meta .stars { color: var(--accent); letter-spacing: 2px; font-size: 13px; }
-  .test-card .meta .name { font-weight: 800; font-size: 17px; margin-top: 6px; letter-spacing: -0.01em; }
-  .test-card .meta .role { font-size: 13px; color: var(--fg-on-dark-dim); margin-top: 2px; }
+  .test-card .meta .stars { color: var(--accent); font-size: 12px; letter-spacing: 1px; }
+  .test-card .meta .tname { font-weight: 800; font-size: 16px; margin-top: 4px; }
+  .test-card .meta .trole { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px; }
 
-  /* Authority */
-  .authority { background: var(--bg-2); }
-  .auth-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; max-width: var(--maxw); margin: 0 auto; align-items: center; }
-  @media (max-width: 880px) { .auth-grid { grid-template-columns: 1fr; gap: 36px; } }
-  .auth-img { aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; }
-  .auth-img img { width: 100%; height: 100%; object-fit: cover; }
-  .auth-credentials { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
-  .cred { background: var(--bg); border: 1px solid var(--line); padding: 22px; border-radius: var(--radius); }
-  .cred .v { font-weight: 900; font-size: 36px; line-height: 1; color: var(--fg); letter-spacing: -0.03em; }
-  .cred .v .acc { color: var(--accent); }
-  .cred .l { font-size: 13px; color: var(--fg-dim); margin-top: 10px; line-height: 1.4; }
+  /* ─── AUTHORITY ─── */
+  .authority { background: var(--dark); color: #fff; overflow: hidden; }
+  .auth-split { display: grid; grid-template-columns: 400px 1fr; }
+  @media (max-width: 980px) { .auth-split { grid-template-columns: 1fr; } }
+  .auth-photo { background: var(--accent); display: flex; align-items: flex-end; justify-content: center; overflow: hidden; padding-top: 80px; min-height: 540px; }
+  .auth-photo img { width: 85%; display: block; object-fit: contain; object-position: bottom; }
+  .auth-body { padding: 96px 80px; display: flex; flex-direction: column; justify-content: center; }
+  @media (max-width: 980px) { .auth-body { padding: 60px 20px; } }
+  .auth-body .eyebrow { color: rgba(255,255,255,0.4); }
+  .auth-body h2 { font-size: clamp(30px, 3.8vw, 50px); font-weight: 300; letter-spacing: -0.02em; line-height: 1.15; margin-top: 16px; }
+  .auth-body h2 strong { font-weight: 900; }
+  .auth-body h2 .hi { color: var(--accent); }
+  .auth-body p { margin-top: 22px; font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 500px; }
+  .auth-creds { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 36px; }
+  .cred { border: 1px solid rgba(255,255,255,0.1); padding: 20px 22px; }
+  .cred .cv { font-weight: 900; font-size: 32px; line-height: 1; letter-spacing: -0.03em; color: #fff; }
+  .cred .cv .ca { color: var(--accent); }
+  .cred .cl { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 8px; line-height: 1.4; font-family: "JetBrains Mono", monospace; letter-spacing: 0.04em; text-transform: uppercase; }
 
-  /* Pricing */
-  .pricing { background: var(--bg); }
-  .price-grid { display: grid; grid-template-columns: 1fr 1.05fr 1fr; gap: 18px; max-width: 1100px; margin: 0 auto; align-items: stretch; }
-  @media (max-width: 880px) { .price-grid { grid-template-columns: 1fr; } }
-  .price-card { background: var(--bg); border: 1px solid var(--line); padding: 36px; border-radius: var(--radius); display: flex; flex-direction: column; position: relative; }
-  .price-card.featured { background: var(--bg-dark); color: var(--fg-on-dark); border-color: var(--bg-dark); transform: scale(1.03); z-index: 1; }
-  @media (max-width: 880px) { .price-card.featured { transform: none; } }
-  .price-card .badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--accent-fg); font-family: "JetBrains Mono", monospace; font-size: 11px; padding: 6px 14px; border-radius: 20px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; white-space: nowrap; }
-  .price-card .plan { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-mute); }
-  .price-card.featured .plan { color: var(--accent); }
-  .price-card .name { font-weight: 900; text-transform: uppercase; font-size: 30px; margin-top: 8px; letter-spacing: -0.02em; }
-  .price-card .price { display: flex; align-items: baseline; gap: 6px; margin-top: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
-  .price-card.featured .price { border-color: var(--line-dark); }
-  .price-card .price .amount { font-weight: 900; font-size: 52px; line-height: 1; letter-spacing: -0.03em; }
-  .price-card .price .per { color: var(--fg-dim); font-size: 14px; }
-  .price-card.featured .price .per { color: var(--fg-on-dark-dim); }
-  .price-card ul { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
-  .price-card li { display: flex; gap: 12px; font-size: 14px; line-height: 1.5; color: var(--fg-dim); }
-  .price-card.featured li { color: var(--fg-on-dark-dim); }
-  .price-card li::before { content: ""; display: block; width: 18px; height: 18px; flex: 0 0 18px; background: var(--accent); margin-top: 1px; border-radius: 50%; clip-path: polygon(0 50%, 30% 80%, 100% 10%, 90% 0, 30% 60%, 10% 40%); }
-  .price-card .cta-wrap { margin-top: 28px; }
-  .price-card .cta-wrap .btn { width: 100%; justify-content: center; }
+  /* ─── CONTACT ─── */
+  .contact { background: var(--bg); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; max-width: var(--maxw); margin: 0 auto; align-items: start; }
+  @media (max-width: 880px) { .contact-grid { grid-template-columns: 1fr; gap: 48px; } }
+  .contact-left h2 { font-size: clamp(32px, 4vw, 52px); font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; margin-top: 16px; }
+  .contact-left h2 strong { font-weight: 900; }
+  .contact-left .lead { margin-top: 20px; font-size: 16px; line-height: 1.7; color: var(--fg-dim); }
+  .contact-trust { margin-top: 36px; display: flex; flex-direction: column; gap: 12px; }
+  .trust-item { display: flex; align-items: center; gap: 12px; font-size: 13.5px; font-weight: 600; color: var(--fg-dim); }
+  .trust-item::before { content: ""; width: 18px; height: 18px; flex: 0 0 18px; background: var(--accent); border-radius: 50%; clip-path: polygon(0 50%, 30% 80%, 100% 10%, 90% 0, 30% 60%, 10% 40%); }
+  .gift { margin-top: 40px; padding: 24px 28px; border-left: 3px solid var(--accent); background: var(--bg-2); }
+  .gift .g-label { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-dark); font-weight: 600; }
+  .gift .g-ttl { font-weight: 800; font-size: 17px; margin-top: 6px; }
+  .gift .g-desc { font-size: 13.5px; color: var(--fg-dim); margin-top: 4px; line-height: 1.5; }
 
-  /* FAQ */
-  .faq-wrap { background: var(--bg-2); }
-  .faq { max-width: 860px; margin: 0 auto; }
+  .form-box { background: var(--bg-2); border: 1px solid var(--line); padding: 44px; }
+  @media (max-width: 720px) { .form-box { padding: 28px 20px; } }
+  .form-box h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+  .form-box .fsub { font-size: 13.5px; color: var(--fg-dim); margin-top: 6px; }
+  .form-group { margin-top: 18px; display: flex; flex-direction: column; gap: 5px; }
+  .form-group label { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-dim); }
+  .form-group input { width: 100%; padding: 13px 16px; border: 1.5px solid var(--line); font: inherit; font-size: 15px; background: var(--bg); color: var(--fg); outline: none; transition: border-color .15s; }
+  .form-group input:focus { border-color: var(--fg); }
+  .form-check { margin-top: 14px; display: flex; gap: 10px; font-size: 12px; color: var(--fg-mute); line-height: 1.5; }
+  .form-check input { accent-color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+  .form-submit { margin-top: 22px; }
+  .form-submit .btn { width: 100%; justify-content: center; font-size: 14px; padding: 16px; }
+  #form-success { display: none; text-align: center; padding: 24px 0; }
+  #form-success .ok { font-size: 32px; margin-bottom: 10px; }
+  #form-success p { font-weight: 700; font-size: 16px; }
+  #form-success small { display: block; color: var(--fg-dim); margin-top: 6px; font-size: 13px; }
+
+  /* ─── FAQ ─── */
+  .faq-section { background: var(--bg-2); }
+  .faq { max-width: 800px; margin: 0 auto; }
   .faq-item { border-bottom: 1px solid var(--line); }
-  .faq-item button { width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center; padding: 26px 0; font-size: 18px; font-weight: 700; gap: 24px; letter-spacing: -0.01em; }
-  .faq-item .plus { width: 32px; height: 32px; border: 1.5px solid var(--line); border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; transition: transform .25s ease, background .2s ease, color .2s ease, border-color .2s ease; font-size: 18px; line-height: 1; background: var(--bg); }
-  .faq-item.open .plus { transform: rotate(45deg); background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  .faq-item button { width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; font-size: 17px; font-weight: 700; gap: 24px; letter-spacing: -0.01em; }
+  .faq-item .plus { width: 30px; height: 30px; border: 1.5px solid var(--line); display: grid; place-items: center; flex-shrink: 0; transition: transform .25s, background .2s, border-color .2s; font-size: 18px; background: var(--bg); }
+  .faq-item.open .plus { transform: rotate(45deg); background: var(--accent); border-color: var(--accent); }
   .faq-item .answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
   .faq-item.open .answer { max-height: 400px; }
-  .faq-item .answer-inner { padding: 0 0 26px; color: var(--fg-dim); font-size: 15.5px; line-height: 1.65; max-width: 720px; }
+  .faq-item .answer-inner { padding: 0 0 24px; color: var(--fg-dim); font-size: 15px; line-height: 1.7; max-width: 680px; }
 
-  /* CTA final */
-  .final-cta { background: var(--accent); color: var(--accent-fg); padding: 110px 24px; text-align: center; position: relative; overflow: hidden; }
-  .final-cta::before {
-    content: ""; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(255,255,255,0.4) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .final-cta > * { position: relative; z-index: 1; }
-  .final-cta h2 { font-size: clamp(46px, 6.5vw, 84px); }
-  .final-cta .sub { margin-top: 22px; font-size: 18px; max-width: 620px; margin-left: auto; margin-right: auto; line-height: 1.6; font-weight: 500; }
-  .final-cta .ctas { margin-top: 40px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .final-cta .btn-dark { background: var(--bg-dark); color: var(--accent); border-color: var(--bg-dark); }
-  .final-cta .btn-dark:hover { background: #1f1f1c; }
-  .final-cta .btn-ghost { color: var(--accent-fg); border-color: rgba(10,10,10,0.25); }
-  .final-cta .btn-ghost:hover { border-color: var(--accent-fg); }
-  .guarantee { margin-top: 32px; font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7; font-weight: 600; }
+  /* ─── FINAL CTA ─── */
+  .final { background: var(--dark); color: #fff; padding: 120px 40px; text-align: center; position: relative; overflow: hidden; }
+  .final::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 120%, rgba(243,193,72,0.12) 0%, transparent 60%); }
+  .final > * { position: relative; z-index: 1; }
+  .final .eyebrow { color: rgba(255,255,255,0.4); }
+  .final h2 { font-size: clamp(32px, 4vw, 54px); font-weight: 300; letter-spacing: -0.025em; line-height: 1.15; margin-top: 20px; max-width: 700px; margin-left: auto; margin-right: auto; }
+  .final h2 strong { font-weight: 900; color: var(--accent); }
+  .final .sub { margin-top: 20px; font-size: 17px; color: rgba(255,255,255,0.5); max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.65; }
+  .final-ctas { margin-top: 40px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .final-note { margin-top: 28px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
 
-  /* Footer */
-  footer { background: var(--bg-dark); color: var(--fg-on-dark-dim); padding: 56px 24px 32px; }
-  footer .inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 32px; }
-  @media (max-width: 720px) { footer .inner { grid-template-columns: 1fr 1fr; } }
-  footer .col h4 { color: var(--fg-on-dark); font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
-  footer .col a { display: block; font-size: 14px; padding: 6px 0; }
-  footer .col a:hover { color: var(--accent); }
-  footer .brand { font-size: 14px; line-height: 1.6; margin-top: 16px; }
-  footer .bottom { max-width: var(--maxw); margin: 40px auto 0; padding-top: 24px; border-top: 1px solid var(--line-dark); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; }
+  /* ─── FOOTER ─── */
+  footer { background: var(--bg-2); border-top: 1px solid var(--line); padding: 56px 40px 32px; }
+  @media (max-width: 720px) { footer { padding: 40px 20px 24px; } }
+  footer .foot-inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
+  @media (max-width: 720px) { footer .foot-inner { grid-template-columns: 1fr 1fr; } }
+  footer .foot-col h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; color: var(--fg-mute); margin-bottom: 16px; }
+  footer .foot-col a { display: block; font-size: 13.5px; padding: 5px 0; color: var(--fg-dim); font-weight: 500; }
+  footer .foot-col a:hover { color: var(--fg); }
+  footer .foot-brand { font-size: 13.5px; line-height: 1.65; color: var(--fg-dim); margin-top: 14px; }
+  footer .foot-bottom { max-width: var(--maxw); margin: 40px auto 0; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--fg-mute); }
+  footer .foot-bottom a:hover { color: var(--fg); }
 
-  /* Sticky mobile CTA */
-  .mobile-sticky { position: fixed; bottom: 0; left: 0; right: 0; background: var(--accent); color: var(--accent-fg); padding: 12px 16px; display: none; align-items: center; justify-content: space-between; gap: 12px; z-index: 60; box-shadow: 0 -8px 24px rgba(0,0,0,0.2); border-top: 2px solid var(--accent-fg); }
-  @media (max-width: 720px) { .mobile-sticky { display: flex; } body { padding-bottom: 64px; } }
-  .mobile-sticky .lbl { font-weight: 700; font-size: 13px; flex: 1; line-height: 1.2; }
-  .mobile-sticky .btn { padding: 10px 14px; background: var(--accent-fg); color: var(--accent); border-radius: 4px; font-weight: 700; font-size: 13px; border-color: var(--accent-fg); box-shadow: none; }
+  /* ─── MOBILE STICKY ─── */
+  .sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--dark); color: #fff; padding: 12px 20px; display: none; align-items: center; justify-content: space-between; gap: 12px; z-index: 60; border-top: 2px solid var(--accent); }
+  @media (max-width: 720px) { .sticky-bar { display: flex; } body { padding-bottom: 60px; } }
+  .sticky-bar .sl { font-size: 12px; font-weight: 700; flex: 1; line-height: 1.2; }
+  .sticky-bar .sb { padding: 9px 16px; background: var(--accent); color: var(--accent-fg); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
 </style>
 </head>
 <body>
 
-<!-- Promo bar -->
-<div class="promo-bar">
-  <strong>★</strong>&nbsp;&nbsp;Sin permanencia · Soporte directo del equipo TN · Programación entregada con +15 días de antelación&nbsp;&nbsp;<strong>★</strong>
-</div>
+<!-- Promo -->
+<div class="promo">Sin permanencia · Soporte 24/7 · Programación entregada con +15 días de antelación</div>
 
 <!-- Nav -->
-<nav class="top">
-  <div class="inner">
-    <div class="logo">
-      <div class="logo-img"><img src="project/assets/logo.png" alt="Training Norte"></div>
-      <span>TN BOX</span>
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-logo-img"><img src="project/assets/logo.png" alt="Training Norte"></div>
     </div>
     <div class="nav-links">
-      <a href="#problema">El problema</a>
-      <a href="#solucion">Solución</a>
-      <a href="#programas">Programas</a>
+      <a href="#features">Por qué TN</a>
+      <a href="#programs">Programas</a>
       <a href="#testimonios">Testimonios</a>
-      <a href="#precios">Precios</a>
+      <a href="#contact">Contacto</a>
       <a href="#faq">FAQ</a>
     </div>
-    <button class="btn btn-primary" onclick="scrollToSection('precios')">
-      Reservar llamada gratis <span class="arrow">→</span>
-    </button>
+    <button class="btn btn-accent" onclick="scrollTo('contact')">Prueba 30 días gratis <span class="arrow">→</span></button>
   </div>
 </nav>
 
 <!-- Hero -->
 <section class="hero">
-  <div class="hero-inner">
-    <div>
-      <div class="eyebrow on-dark">Programación para boxes · Desde 2014</div>
-      <h1 class="display">
-        La programación que llena tu <span class="accent">BOX.</span>
-      </h1>
-      <p class="sub">Una estructura única — basada en evidencia y probada por +100 boxes — para mantener a tus atletas en progreso constante, libres de lesiones, y a tu equipo de coaches enseñando mejor. Tú te dedicas a tu negocio. Nosotros, a programar.</p>
-      <div class="hero-ctas">
-        <button class="btn btn-primary" onclick="scrollToSection('precios')">
-          Reservar llamada gratis <span class="arrow">→</span>
-        </button>
-        <button class="btn btn-ghost on-dark" onclick="scrollToSection('programas')">
-          Ver programaciones
-        </button>
-      </div>
-      <div class="hero-trust">
-        <div class="stat">
-          <span class="num">+100</span>
-          <span class="lbl">Boxes confían</span>
-        </div>
-        <div class="divider"></div>
-        <div class="stat">
-          <span class="num">95%</span>
-          <span class="lbl">Clases prueba se quedan</span>
-        </div>
-        <div class="divider"></div>
-        <div class="stat">
-          <span class="num">+15</span>
-          <span class="lbl">Años de experiencia</span>
-        </div>
-      </div>
+  <div class="hero-bg">
+    <img src="project/assets/group-training.jpeg" alt="Training Norte comunidad">
+  </div>
+  <div class="hero-content container">
+    <div class="eyebrow">El programa #1 para boxes · Desde 2014</div>
+    <h1>Haz que tu BOX sea una <span class="hi">referencia.</span></h1>
+    <p class="hero-sub">Gana calidad delegando tu programación a profesionales con +15 años de experiencia. Forma parte de una comunidad de +40 centros internacionales y recibe el soporte que necesitas 24/7.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-accent" onclick="scrollTo('contact')">Prueba 30 días gratis <span class="arrow">→</span></button>
+      <button class="btn btn-white" onclick="scrollTo('programs')">Ver programaciones</button>
     </div>
-    <div class="hero-visual">
-      <img src="project/assets/group-training.jpeg" alt="Comunidad Training Norte">
-      <div class="frame"></div>
-      <div class="badge">
-        <div class="dot"></div>
-        <div class="txt">
-          <strong>Programación de la semana</strong>
-          <span>Entregada con +15 días de antelación</span>
-        </div>
-      </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="n">+40</div><div class="l">Centros confían en TN</div></div>
+      <div class="hero-stat"><div class="n">95%</div><div class="l">Clases de prueba se quedan</div></div>
+      <div class="hero-stat"><div class="n">+15</div><div class="l">Años de experiencia</div></div>
     </div>
   </div>
 </section>
 
-<!-- Logo strip -->
-<div class="strip">
-  <div class="strip-inner">
-    <div class="label"><strong>+100 BOXES</strong> en España y Europa confían en TN</div>
-    <div class="logos">
-      <div class="logo-item">VERSUS CROSSFIT</div>
-      <div class="logo-item">BOX MADRID</div>
-      <div class="logo-item">FUNCTIONAL VIGO</div>
-      <div class="logo-item">WOD BILBAO</div>
-      <div class="logo-item">ATLAS BCN</div>
-      <div class="logo-item">RAW SEVILLA</div>
+<!-- Boxes strip -->
+<div class="boxes-strip">
+  <div class="boxes-strip-inner">
+    <div class="label">+40 centros en España y Latinoamérica</div>
+    <div class="names">
+      <div class="name">Versus CrossFit</div>
+      <div class="name">Ambit Fitness</div>
+      <div class="name">CrossFit Mataró</div>
+      <div class="name">Artic Box</div>
+      <div class="name">Púlsar CrossFit</div>
+      <div class="name">YoinBox</div>
     </div>
   </div>
 </div>
 
-<!-- Pain -->
-<section class="block pain" id="problema">
-  <div class="block-head">
-    <div class="eyebrow">El problema</div>
-    <h2 class="display">Un atleta lesionado <br>no solo se va.</h2>
-    <p class="lead">
-      Puede dañar la reputación de tu centro y de tu equipo. Tus alumnos vienen a mejorar
-      su calidad de vida, y la clave para lograrlo es optimizar su calidad de movimiento.
-    </p>
+<!-- Features -->
+<section class="section features" id="features">
+  <div class="section-head">
+    <div class="eyebrow">Por qué TN BOX</div>
+    <h2><strong>Una estructura única</strong> diseñada para tu box.</h2>
+    <p class="lead">Tus alumnos vienen a mejorar su calidad de vida. Un atleta con dolor abandona el box. Un atleta lesionado puede dañar la reputación de tu centro.</p>
   </div>
-  <div class="pain-grid">
-    <div class="pain-card">
-      <div class="num">01</div>
-      <div>
-        <div class="ttl">Programar te roba horas que necesitas en otro sitio</div>
-        <div class="desc">Cada semana invertida en planificar es tiempo que dejas de dedicar a tus atletas, a tu equipo y a hacer crecer tu negocio.</div>
-      </div>
+  <div class="features-grid">
+    <div class="feat">
+      <div class="f-num">01</div>
+      <div class="f-line"></div>
+      <div class="f-ttl">Sin lesiones, más progreso</div>
+      <div class="f-desc">Tus entrenadores recibirán una guía diaria que mejora la postura y los rangos de movimiento de cada atleta, haciendo accesibles los movimientos más complejos.</div>
     </div>
-    <div class="pain-card">
-      <div class="num">02</div>
-      <div>
-        <div class="ttl">Sesiones sin objetivo claro fatigan a tus coaches</div>
-        <div class="desc">¿En qué debe enfocarse el coach? ¿Cómo sacar lo mejor de cada atleta? Sin estructura, cada clase depende de la inspiración del momento.</div>
-      </div>
+    <div class="feat">
+      <div class="f-num">02</div>
+      <div class="f-line"></div>
+      <div class="f-ttl">Hasta 4 niveles por día</div>
+      <div class="f-desc">Programación que ofrece hasta cuatro niveles diarios integrados en la misma clase — desde principiantes hasta los más avanzados, nadie se queda atrás.</div>
     </div>
-    <div class="pain-card">
-      <div class="num">03</div>
-      <div>
-        <div class="ttl">Atletas estancados acaban abandonando</div>
-        <div class="desc">Sin progresión visible ni adaptaciones por nivel, la motivación cae. Y un atleta con dolor o sin progreso es un atleta que se va.</div>
-      </div>
+    <div class="feat">
+      <div class="f-num">03</div>
+      <div class="f-line"></div>
+      <div class="f-ttl">Coaching que evoluciona</div>
+      <div class="f-desc">Herramientas y recomendaciones detalladas en texto y vídeo para que tu equipo no solo entrene mejor, sino también enseñe mejor cada día.</div>
     </div>
   </div>
 </section>
 
 <!-- Solution -->
-<section class="block solution" id="solucion">
-  <div class="solution-grid">
-    <div class="solution-img">
-      <img src="project/assets/group-versus.jpg" alt="Comunidad de un box afiliado a Training Norte">
-      <div class="tag">★ Comunidad TN</div>
+<section class="solution" id="solution">
+  <div class="solution-split">
+    <div class="solution-photo">
+      <img src="project/assets/group-training.jpeg" alt="Comunidad Training Norte">
+      <div class="photo-tag">★ Comunidad TN</div>
     </div>
-    <div>
-      <div class="eyebrow">La solución</div>
-      <h2 class="display" style="font-size: clamp(36px, 4.6vw, 56px); margin-top: 16px;">
-        Una estructura única para mantener a tus deportistas en progreso constante y libres de lesiones.
-      </h2>
-      <div class="solution-bullets">
-        <div class="bullet">
-          <div class="icon">✓</div>
-          <div>
-            <div class="ttl">Guía diaria para tus entrenadores</div>
-            <div class="desc">Mejora la postura y los rangos de movimiento de cada atleta — los movimientos más complejos se vuelven accesibles para todos.</div>
+    <div class="solution-body">
+      <div class="eyebrow">Lo que incluye</div>
+      <h2><strong>No te damos una programación</strong> y ya está.</h2>
+      <div class="sol-items">
+        <div class="sol-item">
+          <div class="si-mark"><span>✓</span></div>
+          <div class="si-body">
+            <div class="si-ttl">Programación basada en evidencia científica</div>
+            <div class="si-desc">Cada entrenamiento respaldado por estudios y probado en la práctica. Resultados medibles y adaptados a tu box.</div>
           </div>
         </div>
-        <div class="bullet">
-          <div class="icon">✓</div>
-          <div>
-            <div class="ttl">Cada sesión con un objetivo claro</div>
-            <div class="desc">Recibirás herramientas y recomendaciones detalladas — texto y vídeo — para que tu equipo entrene mejor y enseñe mejor.</div>
+        <div class="sol-item">
+          <div class="si-mark"><span>✓</span></div>
+          <div class="si-body">
+            <div class="si-ttl">Creada en base a tu comunidad y material</div>
+            <div class="si-desc">Adaptada a los objetivos de tu box. Vídeos explicativos y guía de cada sesión para garantizar el éxito.</div>
           </div>
         </div>
-        <div class="bullet">
-          <div class="icon">✓</div>
-          <div>
-            <div class="ttl">Eficaz, segura y basada en evidencia</div>
-            <div class="desc">Cada entrenamiento está respaldado por estudios y probado en la práctica. Resultados medibles, adaptados a las necesidades de tu box.</div>
+        <div class="sol-item">
+          <div class="si-mark"><span>✓</span></div>
+          <div class="si-body">
+            <div class="si-ttl">Trabajo accesorio 4 sesiones semanales</div>
+            <div class="si-desc">El complemento idóneo al desarrollo de movilidad, fuerza y resistencia para los atletas que necesitan un extra.</div>
           </div>
         </div>
-        <div class="bullet">
-          <div class="icon">✓</div>
-          <div>
-            <div class="ttl">Nos involucramos al 100% con tu box</div>
-            <div class="desc">No te damos una programación y ya está. Desde técnica hasta motivación, tendrás todo para elevar el nivel de tus clases.</div>
+        <div class="sol-item">
+          <div class="si-mark"><span>✓</span></div>
+          <div class="si-body">
+            <div class="si-ttl">Soporte 24/7 con el equipo TN</div>
+            <div class="si-desc">Nos involucramos al 100% con tu box. Feedback continuo para que tu comunidad progrese y tu retención se dispare.</div>
           </div>
         </div>
       </div>
-      <div style="margin-top: 40px;">
-        <button class="btn btn-dark" onclick="scrollToSection('precios')">
-          Reservar llamada gratis <span class="arrow">→</span>
-        </button>
+      <div style="margin-top:36px;">
+        <button class="btn btn-accent" onclick="scrollTo('contact')">Prueba 30 días gratis <span class="arrow">→</span></button>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Programs -->
-<section class="block programs" id="programas">
-  <div class="block-head">
-    <div class="eyebrow on-dark">Qué incluye</div>
-    <h2 class="display" style="color: var(--fg-on-dark);">
-      8 programaciones, <span style="color: var(--accent);">1 sola suscripción.</span>
-    </h2>
-    <p class="lead on-dark">
-      Recibirás con +15 días de antelación las programaciones TN BOX, Accesorios, Halterofilia, Gimnásticos,
-      Powerbuilding, Endurance, Hyrox y Landmine. Cada programa incluye guía detallada con vídeos explicativos.
-    </p>
+<section class="section programs" id="programs">
+  <div class="section-head">
+    <div class="eyebrow">Qué incluye</div>
+    <h2>8 programaciones, <strong>1 sola suscripción.</strong></h2>
+    <p class="lead">Recibirás con +15 días de antelación cada programa. Cada uno incluye guía detallada con vídeos explicativos para tus coaches.</p>
   </div>
   <div class="programs-grid">
-    <div class="prog-card">
-      <div class="corner"></div>
-      <div class="tag">Programa principal</div>
-      <div class="name">TN BOX</div>
-      <div class="desc">La programación de referencia. Estructura completa, progresiones por nivel y vídeos explicativos.</div>
-    </div>
-    <div class="prog-card">
-      <div class="corner"></div>
-      <div class="tag">Complemento</div>
-      <div class="name">Accesorios</div>
-      <div class="desc">Trabajo específico de fuerza, hipertrofia y prevención para complementar el WOD diario.</div>
-    </div>
-    <div class="prog-card">
-      <div class="corner"></div>
-      <div class="tag">Especialidad</div>
-      <div class="name">Halterofilia</div>
-      <div class="desc">Snatch, clean &amp; jerk. Técnica y ciclos de fuerza diseñados por especialistas.</div>
-    </div>
-    <div class="prog-card">
-      <div class="corner"></div>
-      <div class="tag">Especialidad</div>
-      <div class="name">Gimnásticos</div>
-      <div class="desc">Progresiones para hombros y caderas fuertes. Movimientos avanzados accesibles.</div>
-    </div>
-    <div class="prog-card">
-      <div class="corner"></div>
-      <div class="tag">Especialidad</div>
-      <div class="name">Powerbuilding</div>
-      <div class="desc">Combinación de fuerza absoluta e hipertrofia para atletas que quieren más volumen.</div>
-    </div>
-    <div class="prog-card">
-      <div class="corner"></div>
-      <div class="tag">Especialidad</div>
-      <div class="name">Endurance</div>
-      <div class="desc">Capacidad aeróbica y umbrales. Para preparar atletas de larga distancia.</div>
-    </div>
-    <div class="prog-card">
-      <div class="corner"></div>
-      <div class="tag">Competición</div>
-      <div class="name">Hyrox</div>
-      <div class="desc">Preparación específica para competidores de Hyrox: ritmos, transiciones y resistencia.</div>
-    </div>
-    <div class="prog-card">
-      <div class="corner"></div>
-      <div class="tag">Especialidad</div>
-      <div class="name">Landmine</div>
-      <div class="desc">Programa diseñado alrededor de la barra landmine. Variedad sin necesidad de material extra.</div>
-    </div>
+    <div class="prog"><div class="p-tag">Principal</div><div class="p-name">TN BOX</div><div class="p-desc">La clase estrella de tu centro. Estructura completa, progresiones por nivel y guía para coaches.</div></div>
+    <div class="prog"><div class="p-tag">Complemento</div><div class="p-name">Accesorios</div><div class="p-desc">4 sesiones semanales de movilidad, fuerza y resistencia para el atleta que necesita un extra.</div></div>
+    <div class="prog"><div class="p-tag">Especialidad</div><div class="p-name">Halterofilia</div><div class="p-desc">Snatch, clean & jerk. Técnica y ciclos de fuerza diseñados por especialistas.</div></div>
+    <div class="prog"><div class="p-tag">Especialidad</div><div class="p-name">Gimnásticos</div><div class="p-desc">Progresiones para hombros y caderas fuertes. Movimientos avanzados accesibles para todos.</div></div>
+    <div class="prog"><div class="p-tag">Especialidad</div><div class="p-name">Powerbuilding</div><div class="p-desc">Fuerza absoluta e hipertrofia para atletas que quieren más volumen de entrenamiento.</div></div>
+    <div class="prog"><div class="p-tag">Especialidad</div><div class="p-name">Endurance</div><div class="p-desc">Capacidad aeróbica y umbrales. Para preparar atletas de larga distancia y competición.</div></div>
+    <div class="prog"><div class="p-tag">Competición</div><div class="p-name">Hyrox</div><div class="p-desc">Preparación específica para Hyrox: ritmos, transiciones y resistencia específica.</div></div>
+    <div class="prog"><div class="p-tag">Especialidad</div><div class="p-name">Landmine</div><div class="p-desc">Programa alrededor de la barra landmine. Variedad sin necesidad de material extra.</div></div>
   </div>
 </section>
 
-<!-- Steps -->
-<section class="block" style="background: var(--bg);">
-  <div class="block-head">
+<!-- How it works -->
+<section class="section how">
+  <div class="section-head">
     <div class="eyebrow">Cómo funciona</div>
-    <h2 class="display">Cuatro pasos. <br>Cero excusas.</h2>
+    <h2>Así de simple <strong>es empezar.</strong></h2>
   </div>
-  <div class="steps">
-    <div class="step">
-      <div class="num">Paso 01</div>
-      <div class="ttl">Reservas tu llamada</div>
-      <div class="desc">Hablamos 20 minutos sobre tu box, tu comunidad y dónde estás ahora.</div>
-    </div>
-    <div class="step">
-      <div class="num">Paso 02</div>
-      <div class="ttl">Elegimos tu plan</div>
-      <div class="desc">TN BOX solo o combinado con especialidades — el que mejor encaje con tu box.</div>
-    </div>
-    <div class="step">
-      <div class="num">Paso 03</div>
-      <div class="ttl">Recibes la programación</div>
-      <div class="desc">Llega cada semana con +15 días de antelación, vídeos y guía para tus coaches.</div>
-    </div>
-    <div class="step">
-      <div class="num">Paso 04</div>
-      <div class="ttl">Tus atletas progresan</div>
-      <div class="desc">Comunidad más fuerte, menos lesiones, retención alta — y tú con tiempo libre.</div>
-    </div>
+  <div class="steps-grid">
+    <div class="step"><div class="s-num">01</div><div class="s-ttl">Nos cuentas tu caso</div><div class="s-desc">Hablamos sobre tu box, tu comunidad y lo que necesitas. Sin compromiso.</div></div>
+    <div class="step"><div class="s-num">02</div><div class="s-ttl">Encontramos el plan</div><div class="s-desc">Juntos elegimos la programación que mejor encaja con tus objetivos.</div></div>
+    <div class="step"><div class="s-num">03</div><div class="s-ttl">Prueba 30 días gratis</div><div class="s-desc">Tu comunidad valida la programación sin riesgo. Sin permanencia.</div></div>
+    <div class="step"><div class="s-num">04</div><div class="s-ttl">Tu box da el salto</div><div class="s-desc">Más retención, menos lesiones, coaches que enseñan mejor.</div></div>
   </div>
 </section>
+
+<!-- Video -->
+<div class="video-section">
+  <video src="project/assets/AL_WEB__2.mov" autoplay muted loop playsinline></video>
+</div>
 
 <!-- Testimonials -->
-<section class="block testimonials" id="testimonios">
-  <div class="block-head">
-    <div class="eyebrow">Lo que dicen los boxes</div>
-    <h2 class="display">No te lo decimos nosotros. <br>Te lo dicen ellos.</h2>
-    <p class="lead">
-      Boxes reales que confiaron su programación a Training Norte. Sus comunidades, sus palabras.
-    </p>
+<section class="section testimonials" id="testimonios">
+  <div class="section-head">
+    <div class="eyebrow">Lo que opinan nuestros centros</div>
+    <h2>No te lo decimos nosotros. <strong>Te lo dicen ellos.</strong></h2>
   </div>
   <div class="test-grid">
     <div class="test-card" onclick="toggleVideo(this)">
       <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T1-SUBTITLED.mov" preload="metadata" playsinline></video>
       <div class="overlay"></div>
-      <div class="play-btn" aria-label="Reproducir testimonio">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      <div class="meta">
-        <div class="stars">★★★★★</div>
-        <div class="name">Testimonio 01</div>
-        <div class="role">Dueño de box afiliado TN</div>
-      </div>
+      <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="meta"><div class="stars">★★★★★</div><div class="tname">Patri</div><div class="trole">Arctic Box</div></div>
     </div>
     <div class="test-card" onclick="toggleVideo(this)">
       <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T6-SUBTITLED.mov" preload="metadata" playsinline></video>
       <div class="overlay"></div>
-      <div class="play-btn" aria-label="Reproducir testimonio">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      <div class="meta">
-        <div class="stars">★★★★★</div>
-        <div class="name">Testimonio 02</div>
-        <div class="role">Dueño de box afiliado TN</div>
-      </div>
+      <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="meta"><div class="stars">★★★★★</div><div class="tname">Chema</div><div class="trole">Box afiliado TN</div></div>
     </div>
     <div class="test-card" onclick="toggleVideo(this)">
       <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T3-SUBTITLED.mov" preload="metadata" playsinline></video>
       <div class="overlay"></div>
-      <div class="play-btn" aria-label="Reproducir testimonio">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      <div class="meta">
-        <div class="stars">★★★★★</div>
-        <div class="name">Testimonio 03</div>
-        <div class="role">Dueño de box afiliado TN</div>
-      </div>
+      <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="meta"><div class="stars">★★★★★</div><div class="tname">Gorobel Crossfit</div><div class="trole">Laudio, Álava</div></div>
     </div>
     <div class="test-card" onclick="toggleVideo(this)">
-      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T1-SUBTITLED.mov" preload="metadata" playsinline></video>
+      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T2-SUBTITLED.mov" preload="metadata" playsinline></video>
       <div class="overlay"></div>
-      <div class="play-btn" aria-label="Reproducir testimonio">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      <div class="meta">
-        <div class="stars">★★★★★</div>
-        <div class="name">Testimonio 04</div>
-        <div class="role">Dueño de box afiliado TN</div>
-      </div>
+      <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="meta"><div class="stars">★★★★★</div><div class="tname">Michel y Mateo</div><div class="trole">Versus Crossfit</div></div>
     </div>
   </div>
 </section>
 
 <!-- Authority -->
-<section class="block authority">
-  <div class="auth-grid">
-    <div class="auth-img">
-      <img src="project/assets/group-versus.jpg" alt="Comunidad de un box trabajando con TN">
+<section class="authority">
+  <div class="auth-split">
+    <div class="auth-photo">
+      <img src="project/assets/Alba_estrada.png" alt="Alba Estrada — Training Norte">
     </div>
-    <div>
+    <div class="auth-body">
       <div class="eyebrow">Quién está detrás</div>
-      <h2 class="display" style="font-size: clamp(36px, 4.6vw, 56px); margin-top: 16px;">
-        Calidad y confianza. <br>La que nos llevó a los <span style="color: var(--accent);">Games</span>.
-      </h2>
-      <p style="margin-top: 24px; color: var(--fg-dim); font-size: 17px; line-height: 1.65; max-width: 580px;">
-        Queremos transmitir y compartir nuestra forma de entrenar y programar — la que nos ha llevado a los
-        CrossFit Games y a las Olimpiadas. Con la que hemos ayudado a miles de atletas de todos los niveles.
-      </p>
-      <div class="auth-credentials">
-        <div class="cred">
-          <div class="v"><span class="acc">+15</span></div>
-          <div class="l">Años programando para boxes</div>
-        </div>
-        <div class="cred">
-          <div class="v"><span class="acc">+100</span></div>
-          <div class="l">Boxes confían en TN</div>
-        </div>
-        <div class="cred">
-          <div class="v">Games</div>
-          <div class="l">Atletas en CrossFit Games</div>
-        </div>
-        <div class="cred">
-          <div class="v">JJ.OO.</div>
-          <div class="l">Experiencia olímpica</div>
-        </div>
+      <h2>La programación que nos llevó a los <span class="hi">Games</span> y las <span class="hi">Olimpiadas.</span></h2>
+      <p>Queremos transmitir y compartir nuestra forma de entrenar y programar — la que nos ha llevado a los CrossFit Games y a las Olimpiadas. Con la que hemos ayudado a miles de atletas de todos los niveles.</p>
+      <div class="auth-creds">
+        <div class="cred"><div class="cv"><span class="ca">+15</span></div><div class="cl">Años programando para boxes y atletas</div></div>
+        <div class="cred"><div class="cv"><span class="ca">+40</span></div><div class="cl">Centros internacionales</div></div>
+        <div class="cred"><div class="cv">Games</div><div class="cl">Atletas en CrossFit Games</div></div>
+        <div class="cred"><div class="cv">JJ.OO.</div><div class="cl">Experiencia olímpica</div></div>
+      </div>
+      <div style="margin-top:36px;">
+        <button class="btn btn-accent" onclick="scrollTo('contact')">Habla con Alba <span class="arrow">→</span></button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Pricing -->
-<section class="block pricing" id="precios">
-  <div class="block-head">
-    <div class="eyebrow">Planes y precios</div>
-    <h2 class="display">El precio de un café <br>por una clase mejor.</h2>
-    <p class="lead">
-      Sin permanencia. Empieza este mes, cancela cuando quieras. El coste por atleta es ridículo
-      frente al tiempo que liberas y la retención que ganas.
-    </p>
-  </div>
-  <div class="price-grid">
-    <div class="price-card">
-      <div class="plan">Plan Esencial</div>
-      <div class="name">TN BOX</div>
-      <div class="price">
-        <span class="amount">Desde 89€</span>
-        <span class="per">/ mes</span>
+<!-- Contact -->
+<section class="section contact" id="contact">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <div class="eyebrow">Encontramos juntos el mejor plan</div>
+      <h2>Te <strong>llamamos</strong> nosotros.</h2>
+      <p class="lead">Déjanos tus datos y encontramos juntos la mejor opción para tu centro. Resolvemos tus dudas e inicias tu prueba de 30 días GRATIS.</p>
+      <div class="contact-trust">
+        <div class="trust-item">Prueba de 30 días completamente gratis</div>
+        <div class="trust-item">Sin permanencia, cancela cuando quieras</div>
+        <div class="trust-item">Soporte directo 24/7 con el equipo TN</div>
+        <div class="trust-item">Programación con +15 días de antelación</div>
       </div>
-      <ul>
-        <li>Programación TN BOX semanal con +15 días de antelación</li>
-        <li>Guía detallada para coaches</li>
-        <li>Vídeos explicativos de cada sesión</li>
-        <li>Adaptaciones por nivel (RX / Scaled / Intro)</li>
-        <li>Soporte por email</li>
-      </ul>
-      <div class="cta-wrap">
-        <button class="btn btn-dark" onclick="scrollToSection('precios')" style="width:100%;justify-content:center;">
-          Empezar ahora <span class="arrow">→</span>
-        </button>
+      <div class="gift">
+        <div class="g-label">★ Regalo de bienvenida</div>
+        <div class="g-ttl">3 clases de iniciación completas y gratuitas</div>
+        <div class="g-desc">Para que puedas guiar a tus alumnos con el sistema TN desde el principio.</div>
       </div>
     </div>
-    <div class="price-card featured">
-      <div class="badge">★ Más elegido</div>
-      <div class="plan">Más popular</div>
-      <div class="name">TN BOX Pro</div>
-      <div class="price">
-        <span class="amount">Desde 149€</span>
-        <span class="per">/ mes</span>
+    <div>
+      <div class="form-box" id="contact-form-wrap">
+        <h3>Déjanos tus datos</h3>
+        <p class="fsub">Te llamamos en menos de 24 horas.</p>
+        <div class="form-group"><label for="f-name">Nombre</label><input type="text" id="f-name" placeholder="Tu nombre" autocomplete="given-name"></div>
+        <div class="form-group"><label for="f-phone">Teléfono</label><input type="tel" id="f-phone" placeholder="+34 600 000 000" autocomplete="tel"></div>
+        <div class="form-group"><label for="f-email">Email</label><input type="email" id="f-email" placeholder="tu@box.com" autocomplete="email"></div>
+        <div class="form-check">
+          <input type="checkbox" id="f-check">
+          <label for="f-check">Acepto recibir comunicaciones comerciales de Training Norte SCG de acuerdo a la política de privacidad.</label>
+        </div>
+        <div class="form-submit"><button class="btn btn-accent" onclick="submitForm()">ENVIAR <span class="arrow">→</span></button></div>
       </div>
-      <ul>
-        <li>Todo lo del plan Esencial</li>
-        <li>+ Accesorios y Gimnásticos</li>
-        <li>+ Halterofilia y Powerbuilding</li>
-        <li>Soporte directo con el equipo TN</li>
-        <li>Onboarding personalizado de tu box</li>
-        <li>Formación continua para coaches</li>
-      </ul>
-      <div class="cta-wrap">
-        <button class="btn btn-primary" onclick="scrollToSection('precios')" style="width:100%;justify-content:center;">
-          Empezar ahora <span class="arrow">→</span>
-        </button>
-      </div>
-    </div>
-    <div class="price-card">
-      <div class="plan">Plan completo</div>
-      <div class="name">TN BOX Elite</div>
-      <div class="price">
-        <span class="amount">Desde 219€</span>
-        <span class="per">/ mes</span>
-      </div>
-      <ul>
-        <li>Todo lo del plan Pro</li>
-        <li>+ Endurance, Hyrox y Landmine</li>
-        <li>Acceso a las 8 programaciones</li>
-        <li>Consultoría mensual 1:1</li>
-        <li>Prioridad absoluta en soporte</li>
-      </ul>
-      <div class="cta-wrap">
-        <button class="btn btn-dark" onclick="scrollToSection('precios')" style="width:100%;justify-content:center;">
-          Empezar ahora <span class="arrow">→</span>
-        </button>
+      <div class="form-box" id="form-success">
+        <div class="ok">✓</div>
+        <p>¡Gracias! Nos pondremos en contacto contigo lo antes posible.</p>
+        <small>Volver a <a href="#" style="text-decoration:underline;">TN BOX</a></small>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="block faq-wrap" id="faq">
-  <div class="block-head">
+<section class="section faq-section" id="faq">
+  <div class="section-head">
     <div class="eyebrow">Preguntas frecuentes</div>
-    <h2 class="display">¿Alguna duda?</h2>
+    <h2><strong>¿Alguna duda?</strong></h2>
   </div>
   <div class="faq">
     <div class="faq-item open">
-      <button onclick="toggleFaq(this)">
-        <span>¿En qué se diferencia TN BOX de otras programaciones?</span>
-        <span class="plus">+</span>
-      </button>
-      <div class="answer">
-        <div class="answer-inner">No te damos una programación y ya está. Nos involucramos al 100% con tu box, con herramientas y recomendaciones detalladas — en texto y vídeo — para que tu equipo no solo entrene mejor, sino también enseñe mejor. Cada sesión tiene un objetivo claro y un enfoque para el coach.</div>
-      </div>
+      <button onclick="toggleFaq(this)"><span>¿En qué se diferencia TN BOX de otras programaciones?</span><span class="plus">+</span></button>
+      <div class="answer"><div class="answer-inner">No te damos una programación y ya está. Nos involucramos al 100% con tu box, con herramientas y recomendaciones detalladas en texto y vídeo para que tu equipo no solo entrene mejor, sino también enseñe mejor. Cada sesión tiene un objetivo claro y un enfoque para el coach.</div></div>
     </div>
     <div class="faq-item">
-      <button onclick="toggleFaq(this)">
-        <span>¿Cuándo recibo la programación cada semana?</span>
-        <span class="plus">+</span>
-      </button>
-      <div class="answer">
-        <div class="answer-inner">Recibirás todas las programaciones con +15 días de antelación, de modo que tus coaches puedan preparar las clases con tiempo, planificar el material y formarse en los movimientos que vienen.</div>
-      </div>
+      <button onclick="toggleFaq(this)"><span>¿Cuándo recibo la programación cada semana?</span><span class="plus">+</span></button>
+      <div class="answer"><div class="answer-inner">Recibirás todas las programaciones con +15 días de antelación, de modo que tus coaches puedan preparar las clases con tiempo, planificar el material y formarse en los movimientos que vienen.</div></div>
     </div>
     <div class="faq-item">
-      <button onclick="toggleFaq(this)">
-        <span>¿Es apta para atletas noveles y avanzados a la vez?</span>
-        <span class="plus">+</span>
-      </button>
-      <div class="answer">
-        <div class="answer-inner">Sí. Las clases las disfruta quien es su primer día y quien lleva años practicando este deporte. Las adaptaciones por nivel forman parte de la estructura: cada sesión incluye opciones RX, escaladas e introducción.</div>
-      </div>
+      <button onclick="toggleFaq(this)"><span>¿Es apta para atletas noveles y avanzados a la vez?</span><span class="plus">+</span></button>
+      <div class="answer"><div class="answer-inner">Sí. Las clases las disfruta quien es su primer día y quien lleva años practicando este deporte. Las adaptaciones por nivel forman parte de la estructura: cada sesión incluye opciones para todos los niveles.</div></div>
     </div>
     <div class="faq-item">
-      <button onclick="toggleFaq(this)">
-        <span>¿Y si mis coaches no tienen experiencia programando?</span>
-        <span class="plus">+</span>
-      </button>
-      <div class="answer">
-        <div class="answer-inner">Mejor. La programación incluye guía detallada para tus entrenadores: en qué fijarse, qué corregir, cómo progresar a los atletas. Es formación continua disfrazada de planificación diaria.</div>
-      </div>
+      <button onclick="toggleFaq(this)"><span>¿Y si mis coaches no tienen experiencia programando?</span><span class="plus">+</span></button>
+      <div class="answer"><div class="answer-inner">Mejor. La programación incluye guía detallada para tus entrenadores: en qué fijarse, qué corregir, cómo progresar a los atletas. Es formación continua disfrazada de planificación diaria.</div></div>
     </div>
     <div class="faq-item">
-      <button onclick="toggleFaq(this)">
-        <span>¿Está basada en evidencia o es 'intuición'?</span>
-        <span class="plus">+</span>
-      </button>
-      <div class="answer">
-        <div class="answer-inner">Nuestra programación está diseñada para ser eficaz, segura y basada en evidencia científica. Cada entrenamiento está respaldado por estudios y probado en la práctica, lo que asegura resultados medibles y adaptados a las necesidades de tu box.</div>
-      </div>
+      <button onclick="toggleFaq(this)"><span>¿Está basada en evidencia o es intuición?</span><span class="plus">+</span></button>
+      <div class="answer"><div class="answer-inner">Nuestra programación está diseñada para ser eficaz, segura y basada en evidencia científica. Cada entrenamiento está respaldado por estudios y probado en la práctica. Tus alumnos merecen sólo lo mejor.</div></div>
     </div>
     <div class="faq-item">
-      <button onclick="toggleFaq(this)">
-        <span>¿Hay permanencia?</span>
-        <span class="plus">+</span>
-      </button>
-      <div class="answer">
-        <div class="answer-inner">No. Empieza este mes, cancela cuando quieras. Si la programación no funciona para tu box, no te queremos atado.</div>
-      </div>
+      <button onclick="toggleFaq(this)"><span>¿Hay permanencia?</span><span class="plus">+</span></button>
+      <div class="answer"><div class="answer-inner">No. Empieza este mes, cancela cuando quieras. Tienes 30 días de prueba gratis para comprobarlo sin riesgo.</div></div>
     </div>
   </div>
 </section>
 
 <!-- Final CTA -->
-<section class="final-cta">
-  <div class="eyebrow on-yellow" style="color: var(--accent-fg);">Da el siguiente paso</div>
-  <h2 class="display" style="margin-top: 20px;">Tus alumnos te dedican <br>tiempo, ilusión y esfuerzo. <br>Merecen sólo lo mejor.</h2>
-  <p class="sub">
-    Reserva una llamada de 20 minutos. Te contamos exactamente cómo encaja TN BOX en tu centro
-    y resolvemos cualquier duda — sin compromiso.
-  </p>
-  <div class="ctas">
-    <button class="btn btn-dark" onclick="scrollToSection('precios')">Reservar llamada gratis <span class="arrow">→</span></button>
-    <button class="btn btn-ghost" onclick="scrollToSection('programas')">Ver programaciones</button>
+<section class="final">
+  <div class="eyebrow">Da el siguiente paso</div>
+  <h2>Tus alumnos merecen <strong>sólo lo mejor.</strong></h2>
+  <p class="sub">Hablamos, resolvemos tus dudas e inicias tu prueba de 30 días GRATIS para que tu comunidad valide la programación.</p>
+  <div class="final-ctas">
+    <button class="btn btn-accent" onclick="scrollTo('contact')">Prueba 30 días gratis <span class="arrow">→</span></button>
+    <button class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.25);" onclick="scrollTo('programs')">Ver programaciones</button>
   </div>
-  <div class="guarantee">★ Sin permanencia · Cancela cuando quieras ★</div>
+  <div class="final-note">★ Sin permanencia · Cancela cuando quieras · 30 días gratis ★</div>
 </section>
 
 <!-- Footer -->
 <footer>
-  <div class="inner">
-    <div class="col">
-      <div class="logo" style="color: var(--fg-on-dark);">
-        <div class="logo-img"><img src="project/assets/logo.png" alt="Training Norte"></div>
-        <span>TN BOX</span>
+  <div class="foot-inner">
+    <div class="foot-col">
+      <div class="nav-logo" style="margin-bottom:14px;">
+        <div class="nav-logo-img"><img src="project/assets/logo.png" alt="Training Norte"></div>
       </div>
-      <div class="brand">
-        Plataforma de acondicionamiento físico para atletas individuales y centros de entrenamiento funcional.
-      </div>
+      <div class="foot-brand">Programación profesional para boxes de entrenamiento funcional. Soporte 24/7 con el equipo TN.</div>
     </div>
-    <div class="col">
-      <h4>Producto</h4>
-      <a href="#programas">Programaciones</a>
-      <a href="#precios">Precios</a>
-      <a href="#faq">FAQ</a>
-    </div>
-    <div class="col">
-      <h4>Empresa</h4>
+    <div class="foot-col">
+      <h4>Atletas</h4>
+      <a href="#">Boxes</a>
+      <a href="#">Formación</a>
       <a href="#">Sobre nosotros</a>
-      <a href="#">Contacto</a>
-      <a href="#">Afiliados</a>
     </div>
-    <div class="col">
-      <h4>Legal</h4>
-      <a href="#">Condiciones</a>
-      <a href="#">Privacidad</a>
-      <a href="#">Cookies</a>
+    <div class="foot-col">
+      <h4>Top seller</h4>
+      <a href="#">TN Box</a>
+      <a href="#">Improve</a>
+      <a href="#">Shoulder Armour</a>
+    </div>
+    <div class="foot-col">
+      <h4>Síguenos</h4>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+      <a href="#">YouTube</a>
+      <a href="#">Spotify</a>
     </div>
   </div>
-  <div class="bottom">
-    <div>© 2026 TN BOX · Training Norte</div>
-    <div>Hecho con ★ en el norte</div>
+  <div class="foot-bottom">
+    <div>© 2024 Training Norte. Todos los derechos reservados.</div>
+    <div>
+      <a href="#" style="margin-right:14px;">Términos y condiciones</a>
+      <a href="#" style="margin-right:14px;">Privacidad</a>
+      <a href="#">Aviso legal</a>
+    </div>
   </div>
 </footer>
 
-<!-- Sticky mobile CTA -->
-<div class="mobile-sticky">
-  <div class="lbl">¿Listo para empezar?</div>
-  <button class="btn" onclick="scrollToSection('precios')">Reservar llamada gratis →</button>
+<!-- Mobile sticky -->
+<div class="sticky-bar">
+  <div class="sl">30 días de prueba gratis</div>
+  <button class="sb" onclick="scrollTo('contact')">Te llamamos →</button>
 </div>
 
 <script>
-  function scrollToSection(id) {
+  function scrollTo(id) {
     const el = document.getElementById(id);
     if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - 70;
+    const y = el.getBoundingClientRect().top + window.scrollY - 68;
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
-
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    // Close all
+    const open = item.classList.contains('open');
     document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    // Open clicked if it was closed
-    if (!isOpen) item.classList.add('open');
+    if (!open) item.classList.add('open');
   }
-
   function toggleVideo(card) {
     const video = card.querySelector('video');
     if (!video) return;
     if (card.classList.contains('playing')) {
-      video.pause();
-      card.classList.remove('playing');
+      video.pause(); card.classList.remove('playing');
     } else {
-      // Pause all other videos
-      document.querySelectorAll('.test-card.playing').forEach(c => {
-        c.querySelector('video').pause();
-        c.classList.remove('playing');
-      });
-      video.play().then(() => {
-        card.classList.add('playing');
-        video.controls = true;
-      }).catch(() => {});
+      document.querySelectorAll('.test-card.playing').forEach(c => { c.querySelector('video').pause(); c.classList.remove('playing'); });
+      video.play().then(() => { card.classList.add('playing'); video.controls = true; }).catch(() => {});
     }
-    video.addEventListener('ended', () => {
-      card.classList.remove('playing');
-      video.controls = false;
-    }, { once: true });
-    video.addEventListener('pause', () => {
-      if (video.ended) return;
-      card.classList.remove('playing');
-      video.controls = false;
-    }, { once: true });
+    video.addEventListener('ended', () => { card.classList.remove('playing'); video.controls = false; }, { once: true });
+    video.addEventListener('pause', () => { if (video.ended) return; card.classList.remove('playing'); video.controls = false; }, { once: true });
+  }
+  function submitForm() {
+    const n = document.getElementById('f-name').value.trim();
+    const p = document.getElementById('f-phone').value.trim();
+    const e = document.getElementById('f-email').value.trim();
+    if (!n || !p || !e) { alert('Por favor, rellena todos los campos.'); return; }
+    document.getElementById('contact-form-wrap').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
   }
 </script>
 </body>
