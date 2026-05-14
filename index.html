@@ -160,8 +160,16 @@
   .step .s-desc { font-size: 13.5px; line-height: 1.65; color: rgba(255,255,255,0.45); margin-top: 10px; }
 
   /* ─── VIDEO ─── */
-  .video-section { background: var(--dark); line-height: 0; }
-  .video-section video { width: 100%; display: block; max-height: 580px; object-fit: cover; }
+  .video-showcase { position: relative; min-height: 72vh; overflow: hidden; background: #0a0a0a; }
+  .video-showcase video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .showcase-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.55) 100%); pointer-events: none; transition: opacity .4s; }
+  .video-showcase.playing .showcase-overlay { opacity: 0.1; }
+  .showcase-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 88px; height: 88px; border-radius: 50%; background: var(--accent); color: var(--accent-fg); display: grid; place-items: center; box-shadow: 0 16px 48px rgba(0,0,0,0.5); transition: transform .2s, opacity .25s; cursor: pointer; border: none; }
+  .video-showcase.playing .showcase-play { opacity: 0; pointer-events: none; }
+  .showcase-play:hover { transform: translate(-50%,-50%) scale(1.1); }
+  .showcase-play svg { width: 32px; height: 32px; margin-left: 5px; fill: var(--accent-fg); }
+  .showcase-label { position: absolute; bottom: 36px; left: 0; right: 0; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: opacity .3s; pointer-events: none; }
+  .video-showcase.playing .showcase-label { opacity: 0; }
 
   /* ─── TESTIMONIALS ─── */
   .testimonials { background: var(--bg-2); }
@@ -473,9 +481,14 @@
 </section>
 
 <!-- Video -->
-<div class="video-section">
-  <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/AL_WEB__2.mov" autoplay muted loop playsinline></video>
-</div>
+<section class="video-showcase" onclick="toggleShowcase(this)">
+  <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/AL_WEB__2.mov" poster="project/assets/group-training.jpeg" preload="metadata" playsinline></video>
+  <div class="showcase-overlay"></div>
+  <button class="showcase-play" aria-label="Reproducir vídeo">
+    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  </button>
+  <div class="showcase-label">La comunidad TN · En movimiento</div>
+</section>
 
 <!-- Testimonials -->
 <section class="section testimonials" id="testimonios">
@@ -759,6 +772,17 @@
        .bindPopup('<b>' + b.n + '</b><span>' + b.c + '</span>');
     });
   })();
+
+  function toggleShowcase(section) {
+    const video = section.querySelector('video');
+    if (section.classList.contains('playing')) {
+      video.pause(); section.classList.remove('playing');
+    } else {
+      video.play().then(() => section.classList.add('playing')).catch(() => {});
+    }
+    video.addEventListener('ended', () => { section.classList.remove('playing'); }, { once: true });
+    video.addEventListener('pause', () => { if (!video.ended) section.classList.remove('playing'); }, { once: true });
+  }
 
   function scrollTo(id) {
     const el = document.getElementById(id);
