@@ -174,11 +174,12 @@
 
   /* Testimonials */
   .testimonials { background: var(--bg); }
-  .test-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: var(--maxw); margin: 0 auto; }
-  @media (max-width: 880px) { .test-grid { grid-template-columns: 1fr; } }
+  .test-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: var(--maxw); margin: 0 auto; }
+  @media (max-width: 980px) { .test-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .test-grid { grid-template-columns: repeat(2, 1fr); } }
   .test-card {
     position: relative; background: var(--bg-dark); border-radius: var(--radius); overflow: hidden;
-    aspect-ratio: 16/10; cursor: pointer; transition: transform .25s ease;
+    aspect-ratio: 9/16; cursor: pointer; transition: transform .25s ease;
   }
   .test-card:hover { transform: translateY(-3px); }
   .test-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -210,16 +211,23 @@
   .test-card .meta .role { font-size: 13px; color: var(--fg-on-dark-dim); margin-top: 2px; }
 
   /* Authority */
-  .authority { background: var(--bg-2); }
-  .auth-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; max-width: var(--maxw); margin: 0 auto; align-items: center; }
-  @media (max-width: 880px) { .auth-grid { grid-template-columns: 1fr; gap: 36px; } }
-  .auth-img { aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; }
-  .auth-img img { width: 100%; height: 100%; object-fit: cover; }
-  .auth-credentials { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
-  .cred { background: var(--bg); border: 1px solid var(--line); padding: 22px; border-radius: var(--radius); }
-  .cred .v { font-weight: 900; font-size: 36px; line-height: 1; color: var(--fg); letter-spacing: -0.03em; }
+  .authority { background: var(--bg-dark); color: var(--fg-on-dark); overflow: hidden; }
+  .auth-split { display: grid; grid-template-columns: 400px 1fr; }
+  @media (max-width: 980px) { .auth-split { grid-template-columns: 1fr; } }
+  .auth-photo { background: var(--accent); display: flex; align-items: flex-end; justify-content: center; overflow: hidden; padding-top: 80px; min-height: 540px; }
+  .auth-photo img { width: 85%; display: block; object-fit: contain; object-position: bottom; }
+  @media (max-width: 980px) { .auth-photo { min-height: 360px; padding-top: 48px; } }
+  .auth-body { padding: 96px 80px; display: flex; flex-direction: column; justify-content: center; }
+  @media (max-width: 980px) { .auth-body { padding: 60px 24px; } }
+  .auth-body .eyebrow { color: rgba(255,255,255,0.4); }
+  .auth-body h2 { font-size: clamp(32px, 4vw, 52px); font-weight: 900; text-transform: uppercase; line-height: 1; letter-spacing: -0.025em; margin-top: 16px; }
+  .auth-body h2 span { color: var(--accent); }
+  .auth-body p { margin-top: 24px; font-size: 16px; line-height: 1.7; color: var(--fg-on-dark-dim); max-width: 500px; }
+  .auth-credentials { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 36px; }
+  .cred { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 22px; border-radius: var(--radius); }
+  .cred .v { font-weight: 900; font-size: 36px; line-height: 1; color: var(--fg-on-dark); letter-spacing: -0.03em; }
   .cred .v .acc { color: var(--accent); }
-  .cred .l { font-size: 13px; color: var(--fg-dim); margin-top: 10px; line-height: 1.4; }
+  .cred .l { font-size: 13px; color: var(--fg-on-dark-dim); margin-top: 10px; line-height: 1.4; }
 
   /* Pricing */
   .pricing { background: var(--bg); }
@@ -608,8 +616,8 @@
       </div>
       <div class="meta">
         <div class="stars">★★★★★</div>
-        <div class="name">Testimonio 01</div>
-        <div class="role">Dueño de box afiliado TN</div>
+        <div class="name">Patri</div>
+        <div class="role">Arctic Box</div>
       </div>
     </div>
     <div class="test-card" onclick="toggleVideo(this)">
@@ -620,8 +628,8 @@
       </div>
       <div class="meta">
         <div class="stars">★★★★★</div>
-        <div class="name">Testimonio 02</div>
-        <div class="role">Dueño de box afiliado TN</div>
+        <div class="name">Chema</div>
+        <div class="role">Box afiliado TN</div>
       </div>
     </div>
     <div class="test-card" onclick="toggleVideo(this)">
@@ -632,20 +640,20 @@
       </div>
       <div class="meta">
         <div class="stars">★★★★★</div>
-        <div class="name">Testimonio 03</div>
-        <div class="role">Dueño de box afiliado TN</div>
+        <div class="name">Gorobel CrossFit</div>
+        <div class="role">Laudio, Álava</div>
       </div>
     </div>
     <div class="test-card" onclick="toggleVideo(this)">
-      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T1-SUBTITLED.mov" preload="metadata" playsinline></video>
+      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T2-SUBTITLED.mov" preload="metadata" playsinline></video>
       <div class="overlay"></div>
       <div class="play-btn" aria-label="Reproducir testimonio">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
       </div>
       <div class="meta">
         <div class="stars">★★★★★</div>
-        <div class="name">Testimonio 04</div>
-        <div class="role">Dueño de box afiliado TN</div>
+        <div class="name">Michel y Mateo</div>
+        <div class="role">Versus CrossFit</div>
       </div>
     </div>
   </div>
@@ -697,17 +705,17 @@
 </section>
 
 <!-- Authority -->
-<section class="block authority">
-  <div class="auth-grid">
-    <div class="auth-img">
-      <img src="project/assets/group-versus.jpg" alt="Comunidad de un box trabajando con TN">
+<section class="authority">
+  <div class="auth-split">
+    <div class="auth-photo">
+      <img src="project/assets/Alba_estrada.png" alt="Alba Estrada — Training Norte">
     </div>
-    <div>
+    <div class="auth-body">
       <div class="eyebrow">Quién está detrás</div>
-      <h2 class="display" style="font-size: clamp(36px, 4.6vw, 56px); margin-top: 16px;">
-        Calidad y confianza. <br>La que nos llevó a los <span style="color: var(--accent);">Games</span>.
+      <h2 class="display" style="font-size: clamp(32px, 4vw, 52px); margin-top: 16px; text-transform: uppercase;">
+        La programación que nos llevó a los <span style="color: var(--accent);">Games.</span>
       </h2>
-      <p style="margin-top: 24px; color: var(--fg-dim); font-size: 17px; line-height: 1.65; max-width: 580px;">
+      <p style="margin-top: 24px; color: var(--fg-on-dark-dim); font-size: 16px; line-height: 1.7; max-width: 500px;">
         Queremos transmitir y compartir nuestra forma de entrenar y programar — la que nos ha llevado a los
         CrossFit Games y a las Olimpiadas. Con la que hemos ayudado a miles de atletas de todos los niveles.
       </p>
@@ -717,8 +725,8 @@
           <div class="l">Años programando para boxes</div>
         </div>
         <div class="cred">
-          <div class="v"><span class="acc">+100</span></div>
-          <div class="l">Boxes confían en TN</div>
+          <div class="v"><span class="acc">+40</span></div>
+          <div class="l">Centros confían en TN</div>
         </div>
         <div class="cred">
           <div class="v">Games</div>
