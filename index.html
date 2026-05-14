@@ -96,9 +96,9 @@
   .hero-trust .stat .lbl { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-on-dark-dim); }
   .hero-trust .divider { width: 1px; height: 40px; background: var(--line-dark); }
 
-  .hero-visual { position: relative; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; }
+  .hero-visual { position: relative; aspect-ratio: 4/5; overflow: hidden; }
   .hero-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .hero-visual .frame { position: absolute; inset: 0; border: 1px solid rgba(243,193,72,0.3); border-radius: var(--radius); pointer-events: none; }
+  .hero-visual .frame { display: none; }
   .hero-visual .badge {
     position: absolute; bottom: 24px; left: 24px; right: 24px;
     background: var(--accent); color: var(--accent-fg); padding: 16px 20px; border-radius: var(--radius);
@@ -139,12 +139,15 @@
   .pain-card .desc { color: var(--fg-dim); font-size: 14.5px; line-height: 1.6; margin-top: 12px; }
 
   /* Solution */
-  .solution { background: var(--bg-2); }
-  .solution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; max-width: var(--maxw); margin: 0 auto; }
-  @media (max-width: 880px) { .solution-grid { grid-template-columns: 1fr; gap: 40px; } }
-  .solution-img { aspect-ratio: 1/1; border-radius: var(--radius); overflow: hidden; position: relative; }
-  .solution-img img { width: 100%; height: 100%; object-fit: cover; }
-  .solution-img .tag { position: absolute; top: 20px; left: 20px; background: var(--accent); color: var(--accent-fg); padding: 8px 14px; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; }
+  .solution { background: var(--bg-2); padding: 0 !important; overflow: hidden; }
+  .solution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; max-width: none; margin: 0; }
+  @media (max-width: 880px) { .solution-grid { grid-template-columns: 1fr; } }
+  .solution-img { position: relative; overflow: hidden; min-height: 600px; }
+  @media (max-width: 880px) { .solution-img { min-height: 380px; } }
+  .solution-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .solution-img .tag { position: absolute; bottom: 24px; left: 24px; background: var(--accent); color: var(--accent-fg); padding: 8px 14px; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .solution-body { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+  @media (max-width: 880px) { .solution-body { padding: 48px 24px; } }
   .solution-bullets { margin-top: 32px; display: flex; flex-direction: column; gap: 22px; }
   .bullet { display: flex; gap: 18px; align-items: flex-start; }
   .bullet .icon { width: 36px; height: 36px; flex: 0 0 36px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; color: var(--accent-fg); font-weight: 900; font-size: 16px; }
@@ -162,6 +165,18 @@
   .prog-card .name { font-weight: 900; text-transform: uppercase; font-size: 24px; margin-top: 12px; letter-spacing: -0.01em; }
   .prog-card .desc { color: var(--fg-on-dark-dim); font-size: 13.5px; line-height: 1.55; margin-top: 12px; }
   .prog-card .corner { position: absolute; top: 22px; right: 22px; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+  /* Video showcase */
+  .video-showcase { position: relative; min-height: 72vh; overflow: hidden; background: #0a0a0a; }
+  .video-showcase video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .showcase-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.55) 100%); pointer-events: none; transition: opacity .4s; }
+  .video-showcase.playing .showcase-overlay { opacity: 0.1; }
+  .showcase-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 88px; height: 88px; border-radius: 50%; background: var(--accent); color: var(--accent-fg); display: grid; place-items: center; box-shadow: 0 16px 48px rgba(0,0,0,0.5); transition: transform .2s, opacity .25s; cursor: pointer; border: none; }
+  .video-showcase.playing .showcase-play { opacity: 0; pointer-events: none; }
+  .showcase-play:hover { transform: translate(-50%,-50%) scale(1.1); }
+  .showcase-play svg { width: 32px; height: 32px; margin-left: 5px; fill: var(--accent-fg); }
+  .showcase-label { position: absolute; bottom: 36px; left: 0; right: 0; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: opacity .3s; pointer-events: none; }
+  .video-showcase.playing .showcase-label { opacity: 0; }
 
   /* Steps */
   .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: var(--maxw); margin: 0 auto; }
@@ -454,13 +469,13 @@
 </section>
 
 <!-- Solution -->
-<section class="block solution" id="solucion">
+<section class="solution" id="solucion">
   <div class="solution-grid">
     <div class="solution-img">
       <img src="project/assets/group-versus.jpg" alt="Comunidad de un box afiliado a Training Norte">
       <div class="tag">★ Comunidad TN</div>
     </div>
-    <div>
+    <div class="solution-body">
       <div class="eyebrow">La solución</div>
       <h2 class="display" style="font-size: clamp(36px, 4.6vw, 56px); margin-top: 16px;">
         Una estructura única para mantener a tus deportistas en progreso constante y libres de lesiones.
@@ -599,12 +614,13 @@
 </section>
 
 <!-- Video showcase -->
-<section style="background: var(--bg-dark); padding: 0; overflow: hidden; position: relative; line-height: 0;">
-  <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/AL_WEB__2.mov" autoplay muted loop playsinline style="width:100%; max-height: 560px; object-fit: cover; display: block;"></video>
-  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.6) 100%);pointer-events:none;"></div>
-  <div style="position:absolute;bottom:40px;left:0;right:0;text-align:center;">
-    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.6);">La comunidad TN · En movimiento</p>
-  </div>
+<section class="video-showcase" onclick="toggleShowcase(this)">
+  <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/AL_WEB__2.mov" poster="project/assets/group-training.jpeg" preload="metadata" playsinline></video>
+  <div class="showcase-overlay"></div>
+  <button class="showcase-play" aria-label="Reproducir vídeo">
+    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  </button>
+  <div class="showcase-label">La comunidad TN · En movimiento</div>
 </section>
 
 <!-- Testimonials -->
@@ -995,6 +1011,17 @@
        .bindPopup('<b>' + b.n + '</b><span>' + b.c + '</span>');
     });
   })();
+
+  function toggleShowcase(section) {
+    const video = section.querySelector('video');
+    if (section.classList.contains('playing')) {
+      video.pause(); section.classList.remove('playing');
+    } else {
+      video.play().then(() => section.classList.add('playing')).catch(() => {});
+    }
+    video.addEventListener('ended', () => { section.classList.remove('playing'); }, { once: true });
+    video.addEventListener('pause', () => { if (!video.ended) section.classList.remove('playing'); }, { once: true });
+  }
 
   function scrollToSection(id) {
     const el = document.getElementById(id);
