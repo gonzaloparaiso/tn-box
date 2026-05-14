@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <style>
   :root {
@@ -254,6 +255,37 @@
   .final-ctas { margin-top: 40px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .final-note { margin-top: 28px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
 
+  /* ─── COMMUNITY MAP ─── */
+  .comunidad { background: #0a0a0a; color: #fff; padding: 80px 0 0; }
+  .com-head { max-width: var(--maxw); margin: 0 auto; padding: 0 40px 48px; }
+  .com-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); display: inline-flex; align-items: center; gap: 8px; }
+  .com-eyebrow::before { content: ""; display: block; width: 20px; height: 2px; background: var(--accent); }
+  .comunidad h2 { font-size: clamp(28px,4vw,52px); font-weight: 900; line-height: 1; letter-spacing: -0.025em; text-transform: uppercase; margin-top: 14px; }
+  .comunidad h2 span { color: var(--accent); }
+  .com-sub { color: rgba(255,255,255,0.45); font-size: 15px; line-height: 1.65; max-width: 520px; margin-top: 16px; }
+  #boxes-map { width: 100%; height: 480px; }
+  .leaflet-container { background: #111 !important; font-family: "Montserrat", sans-serif !important; }
+  .box-pin { width: 12px; height: 12px; background: #F3C148; border-radius: 50%; border: 2px solid rgba(0,0,0,0.7); box-shadow: 0 0 0 4px rgba(243,193,72,0.2); transition: transform .15s; cursor: pointer; }
+  .box-pin:hover { transform: scale(1.4); }
+  .leaflet-popup-content-wrapper { background: #0a0a0a !important; color: #fff !important; border: 1px solid #2a2a2a !important; border-radius: 4px !important; box-shadow: 0 8px 24px rgba(0,0,0,0.7) !important; }
+  .leaflet-popup-tip-container { display: none; }
+  .leaflet-popup-content { margin: 12px 16px !important; }
+  .leaflet-popup-content b { color: #F3C148; font-size: 13px; font-weight: 700; display: block; }
+  .leaflet-popup-content span { font-family: "JetBrains Mono", monospace; font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 4px; letter-spacing: 0.08em; text-transform: uppercase; display: block; }
+  .leaflet-control-attribution { background: rgba(0,0,0,0.5) !important; }
+  .leaflet-control-attribution, .leaflet-control-attribution a { color: rgba(255,255,255,0.2) !important; font-size: 9px !important; }
+  .leaflet-control-zoom a { background: #1a1a1a !important; color: #fff !important; border-color: #333 !important; }
+  .leaflet-control-zoom a:hover { background: #282828 !important; }
+  .com-grid { max-width: var(--maxw); margin: 0 auto; padding: 40px 40px 64px; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 0; }
+  .com-grid-item { padding: 15px 0; border-bottom: 1px solid #1c1c1c; }
+  .com-grid-item .g-name { font-size: 13px; font-weight: 700; letter-spacing: 0.01em; }
+  .com-grid-item .g-city { font-family: "JetBrains Mono", monospace; font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 3px; letter-spacing: 0.07em; text-transform: uppercase; }
+  @media (max-width: 720px) {
+    .com-head { padding: 0 20px 36px; }
+    #boxes-map { height: 320px; }
+    .com-grid { padding: 32px 20px 48px; grid-template-columns: 1fr 1fr; }
+  }
+
   /* ─── FOOTER ─── */
   footer { background: var(--bg-2); border-top: 1px solid var(--line); padding: 56px 40px 32px; }
   @media (max-width: 720px) { footer { padding: 40px 20px 24px; } }
@@ -479,6 +511,51 @@
   </div>
 </section>
 
+<!-- Community Map -->
+<section class="comunidad" id="comunidad">
+  <div class="com-head">
+    <div class="com-eyebrow">Nuestra comunidad</div>
+    <h2>Más de 40 centros <span>ya confían</span> en TN</h2>
+    <p class="com-sub">De norte a sur, boxes de toda España usan la programación TN para mejorar la calidad de sus clases y retener más atletas.</p>
+  </div>
+  <div id="boxes-map"></div>
+  <div class="com-grid">
+    <div class="com-grid-item"><div class="g-name">Versus CrossFit</div><div class="g-city">Valencia</div></div>
+    <div class="com-grid-item"><div class="g-name">Arctic Box</div><div class="g-city">España</div></div>
+    <div class="com-grid-item"><div class="g-name">Gorobel CrossFit</div><div class="g-city">Laudio, Álava</div></div>
+    <div class="com-grid-item"><div class="g-name">Hard Box Center</div><div class="g-city">Puerto Lumbreras, Murcia</div></div>
+    <div class="com-grid-item"><div class="g-name">Céfiro CrossFit</div><div class="g-city">Salamanca</div></div>
+    <div class="com-grid-item"><div class="g-name">Gym New Quo</div><div class="g-city">Almussafes, Valencia</div></div>
+    <div class="com-grid-item"><div class="g-name">Castrexos Box</div><div class="g-city">Xinzo de Limia, Ourense</div></div>
+    <div class="com-grid-item"><div class="g-name">Suma Sports Center</div><div class="g-city">Vilagarcía de Arousa</div></div>
+    <div class="com-grid-item"><div class="g-name">Box Elite Wellness</div><div class="g-city">Alhaurín, Málaga</div></div>
+    <div class="com-grid-item"><div class="g-name">CrossFit Maliciosa</div><div class="g-city">Moralzarzal, Madrid</div></div>
+    <div class="com-grid-item"><div class="g-name">Five Elements</div><div class="g-city">España</div></div>
+    <div class="com-grid-item"><div class="g-name">P Center Valencia</div><div class="g-city">Albal, Valencia</div></div>
+    <div class="com-grid-item"><div class="g-name">Kilian Arena</div><div class="g-city">España</div></div>
+    <div class="com-grid-item"><div class="g-name">Urban Gym Almendralejo</div><div class="g-city">Almendralejo, Badajoz</div></div>
+    <div class="com-grid-item"><div class="g-name">CrossFit Parla Metropolitano</div><div class="g-city">Parla, Madrid</div></div>
+    <div class="com-grid-item"><div class="g-name">CrossFit Las Rosas Metropolitano</div><div class="g-city">Madrid</div></div>
+    <div class="com-grid-item"><div class="g-name">CrossFit Getafe Metropolitano</div><div class="g-city">Getafe, Madrid</div></div>
+    <div class="com-grid-item"><div class="g-name">Sport Factory Ponteareas</div><div class="g-city">Ponteareas, Pontevedra</div></div>
+    <div class="com-grid-item"><div class="g-name">Pandora Box Torrox</div><div class="g-city">Torrox, Málaga</div></div>
+    <div class="com-grid-item"><div class="g-name">Pandora Box Nerja</div><div class="g-city">Nerja, Málaga</div></div>
+    <div class="com-grid-item"><div class="g-name">CrossTraining Espuña</div><div class="g-city">Alhama de Murcia</div></div>
+    <div class="com-grid-item"><div class="g-name">The Cave Mataró</div><div class="g-city">Mataró, Barcelona</div></div>
+    <div class="com-grid-item"><div class="g-name">Box Kyka Warriors</div><div class="g-city">Jumilla, Murcia</div></div>
+    <div class="com-grid-item"><div class="g-name">YoinBox</div><div class="g-city">España</div></div>
+    <div class="com-grid-item"><div class="g-name">Valhalla Training Box</div><div class="g-city">Talayuela, Cáceres</div></div>
+    <div class="com-grid-item"><div class="g-name">CF Goals Factory</div><div class="g-city">España</div></div>
+    <div class="com-grid-item"><div class="g-name">Box Jam El Casar</div><div class="g-city">El Casar, Guadalajara</div></div>
+    <div class="com-grid-item"><div class="g-name">CrossFit VSG</div><div class="g-city">España</div></div>
+    <div class="com-grid-item"><div class="g-name">Box Kaizen</div><div class="g-city">Pinto, Madrid</div></div>
+    <div class="com-grid-item"><div class="g-name">Halo Functional Move</div><div class="g-city">La Saidia, Valencia</div></div>
+    <div class="com-grid-item"><div class="g-name">Ambit Fitness</div><div class="g-city">España</div></div>
+    <div class="com-grid-item"><div class="g-name">Púlsar CrossFit</div><div class="g-city">España</div></div>
+    <div class="com-grid-item"><div class="g-name">CrossFit Mataró</div><div class="g-city">Mataró, Barcelona</div></div>
+  </div>
+</section>
+
 <!-- Authority -->
 <section class="authority">
   <div class="auth-split">
@@ -634,7 +711,47 @@
   <button class="sb" onclick="scrollTo('contact')">Te llamamos →</button>
 </div>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+  // Community map
+  (function() {
+    const map = L.map('boxes-map', { zoomControl: true, scrollWheelZoom: false }).setView([40.2, -3.7], 5);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 19
+    }).addTo(map);
+    const pin = L.divIcon({ className: '', html: '<div class="box-pin"></div>', iconSize: [12,12], iconAnchor: [6,6], popupAnchor: [0,-12] });
+    [
+      { n: 'Versus CrossFit',               c: 'Valencia',               lat: 39.469, lng: -0.376 },
+      { n: 'Gorobel CrossFit',              c: 'Laudio, Álava',          lat: 43.148, lng: -2.973 },
+      { n: 'Hard Box Center',               c: 'Puerto Lumbreras, Murcia', lat: 37.572, lng: -1.813 },
+      { n: 'Céfiro CrossFit',               c: 'Salamanca',              lat: 40.965, lng: -5.664 },
+      { n: 'Gym New Quo',                   c: 'Almussafes, Valencia',   lat: 39.306, lng: -0.412 },
+      { n: 'Castrexos Box',                 c: 'Xinzo de Limia, Ourense', lat: 42.064, lng: -7.727 },
+      { n: 'Suma Sports Center',            c: 'Vilagarcía de Arousa',   lat: 42.594, lng: -8.769 },
+      { n: 'Box Elite Wellness',            c: 'Alhaurín de la Torre, Málaga', lat: 36.645, lng: -4.551 },
+      { n: 'CrossFit Maliciosa',            c: 'Moralzarzal, Madrid',    lat: 40.693, lng: -3.951 },
+      { n: 'P Center Valencia',             c: 'Albal, Valencia',        lat: 39.382, lng: -0.432 },
+      { n: 'Urban Gym Almendralejo',        c: 'Almendralejo, Badajoz',  lat: 38.687, lng: -6.414 },
+      { n: 'CrossFit Parla Metropolitano',  c: 'Parla, Madrid',          lat: 40.238, lng: -3.766 },
+      { n: 'CrossFit Las Rosas Metropolitano', c: 'Madrid',              lat: 40.426, lng: -3.628 },
+      { n: 'CrossFit Getafe Metropolitano', c: 'Getafe, Madrid',         lat: 40.308, lng: -3.733 },
+      { n: 'Sport Factory Ponteareas',      c: 'Ponteareas, Pontevedra', lat: 42.174, lng: -8.502 },
+      { n: 'Pandora Box Torrox',            c: 'Torrox, Málaga',         lat: 36.763, lng: -3.952 },
+      { n: 'Pandora Box Nerja',             c: 'Nerja, Málaga',          lat: 36.747, lng: -3.868 },
+      { n: 'CrossTraining Espuña',          c: 'Alhama de Murcia',       lat: 37.850, lng: -1.429 },
+      { n: 'The Cave Mataró',               c: 'Mataró, Barcelona',      lat: 41.539, lng:  2.445 },
+      { n: 'Box Kyka Warriors',             c: 'Jumilla, Murcia',        lat: 38.474, lng: -1.328 },
+      { n: 'Valhalla Training Box',         c: 'Talayuela, Cáceres',     lat: 39.983, lng: -5.517 },
+      { n: 'Box Jam El Casar',              c: 'El Casar, Guadalajara',  lat: 40.695, lng: -3.431 },
+      { n: 'Box Kaizen',                    c: 'Pinto, Madrid',          lat: 40.243, lng: -3.706 },
+      { n: 'Halo Functional Move',          c: 'La Saidia, Valencia',    lat: 39.481, lng: -0.375 }
+    ].forEach(function(b) {
+      L.marker([b.lat, b.lng], { icon: pin }).addTo(map)
+       .bindPopup('<b>' + b.n + '</b><span>' + b.c + '</span>');
+    });
+  })();
+
   function scrollTo(id) {
     const el = document.getElementById(id);
     if (!el) return;
