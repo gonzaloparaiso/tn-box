@@ -615,7 +615,7 @@
 
 <!-- Video showcase -->
 <section class="video-showcase" onclick="toggleShowcase(this)">
-  <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/AL_WEB__2.mov" poster="project/assets/group-training.jpeg" preload="metadata" playsinline></video>
+  <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/AL_WEB__2.mov" poster="project/assets/Alba%20Still%20Video.png" preload="metadata" playsinline></video>
   <div class="showcase-overlay"></div>
   <button class="showcase-play" aria-label="Reproducir vídeo">
     <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -634,7 +634,7 @@
   </div>
   <div class="test-grid">
     <div class="test-card" onclick="toggleVideo(this)">
-      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T1-SUBTITLED.mov" preload="metadata" playsinline></video>
+      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T1-SUBTITLED.mov#t=0.001" preload="metadata" playsinline></video>
       <div class="overlay"></div>
       <div class="play-btn" aria-label="Reproducir testimonio">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -646,7 +646,7 @@
       </div>
     </div>
     <div class="test-card" onclick="toggleVideo(this)">
-      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T6-SUBTITLED.mov" preload="metadata" playsinline></video>
+      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T6-SUBTITLED.mov#t=0.001" preload="metadata" playsinline></video>
       <div class="overlay"></div>
       <div class="play-btn" aria-label="Reproducir testimonio">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -658,7 +658,7 @@
       </div>
     </div>
     <div class="test-card" onclick="toggleVideo(this)">
-      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T3-SUBTITLED.mov" preload="metadata" playsinline></video>
+      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T3-SUBTITLED.mov#t=0.001" preload="metadata" playsinline></video>
       <div class="overlay"></div>
       <div class="play-btn" aria-label="Reproducir testimonio">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -670,7 +670,7 @@
       </div>
     </div>
     <div class="test-card" onclick="toggleVideo(this)">
-      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T2-SUBTITLED.mov" preload="metadata" playsinline></video>
+      <video src="https://videos-academia-tn.nyc3.cdn.digitaloceanspaces.com/TN/Testimonios/T2-SUBTITLED.mov#t=0.001" preload="metadata" playsinline></video>
       <div class="overlay"></div>
       <div class="play-btn" aria-label="Reproducir testimonio">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -1015,12 +1015,12 @@
   function toggleShowcase(section) {
     const video = section.querySelector('video');
     if (section.classList.contains('playing')) {
-      video.pause(); section.classList.remove('playing');
+      video.pause(); video.controls = false; section.classList.remove('playing');
     } else {
-      video.play().then(() => section.classList.add('playing')).catch(() => {});
+      video.play().then(() => { section.classList.add('playing'); video.controls = true; }).catch(() => {});
     }
-    video.addEventListener('ended', () => { section.classList.remove('playing'); }, { once: true });
-    video.addEventListener('pause', () => { if (!video.ended) section.classList.remove('playing'); }, { once: true });
+    video.addEventListener('ended', () => { section.classList.remove('playing'); video.controls = false; }, { once: true });
+    video.addEventListener('pause', () => { if (!video.ended) { section.classList.remove('playing'); video.controls = false; } }, { once: true });
   }
 
   function scrollToSection(id) {
