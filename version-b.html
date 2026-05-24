@@ -110,25 +110,18 @@
   .feat .f-ttl { font-size: 22px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; margin-top: 0; }
   .feat .f-desc { font-size: 14.5px; line-height: 1.7; color: var(--fg-dim); margin-top: 14px; }
 
-  /* ─── SOLUTION ─── */
-  .solution { background: var(--bg-2); padding: 0; overflow: hidden; }
-  .solution-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 700px; }
-  @media (max-width: 880px) { .solution-split { grid-template-columns: 1fr; min-height: auto; } }
-  .solution-photo { position: relative; overflow: hidden; min-height: 480px; }
-  .solution-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-  .solution-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, transparent 65%, var(--bg-2) 100%); }
-  .solution-photo .photo-tag { position: absolute; bottom: 28px; left: 28px; z-index: 1; background: var(--accent); color: var(--accent-fg); padding: 7px 14px; font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
-  .solution-body { padding: 96px 72px 96px 60px; display: flex; flex-direction: column; justify-content: center; }
-  @media (max-width: 880px) { .solution-body { padding: 56px 20px; } }
-  .solution-body h2 { font-size: clamp(30px, 3.6vw, 48px); font-weight: 300; letter-spacing: -0.02em; line-height: 1.15; margin-top: 14px; }
-  .solution-body h2 strong { font-weight: 900; }
-  .sol-items { margin-top: 40px; display: flex; flex-direction: column; }
-  .sol-item { display: flex; gap: 0; border-top: 1px solid var(--line); padding: 22px 0; transition: background .15s; }
-  .sol-item:last-child { border-bottom: 1px solid var(--line); }
-  .sol-item .si-mark { width: 28px; flex: 0 0 28px; margin-top: 2px; }
-  .sol-item .si-mark span { display: block; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; font-size: 11px; font-weight: 900; }
-  .sol-item .si-body .si-ttl { font-weight: 700; font-size: 16px; line-height: 1.25; }
-  .sol-item .si-body .si-desc { font-size: 13.5px; line-height: 1.6; color: var(--fg-dim); margin-top: 4px; }
+  /* ─── SOLUTION / WHY ─── */
+  .why-section { background: var(--bg-2); }
+  .why-section .section-head { max-width: 800px; }
+  .why-section .section-head h2 { font-size: clamp(28px, 3.5vw, 46px); }
+  .why-section .section-head h2 .hl { color: var(--accent); font-weight: 900; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 72px; max-width: var(--maxw); margin: 0 auto; }
+  @media (max-width: 820px) { .why-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .why-item { text-align: center; }
+  .why-icon { font-size: 40px; line-height: 1; margin-bottom: 16px; display: flex; justify-content: center; }
+  .why-icon svg { width: 44px; height: 44px; color: var(--accent); fill: var(--accent); }
+  .why-ttl { font-size: 18px; font-weight: 800; color: var(--accent-dark); letter-spacing: -0.01em; margin-bottom: 14px; }
+  .why-desc { font-size: 14.5px; line-height: 1.75; color: var(--fg-dim); text-align: center; }
 
   /* ─── PROGRAMS ─── */
   .programs { background: var(--bg); }
@@ -388,49 +381,39 @@
   <div class="showcase-label">La comunidad TN · En movimiento</div>
 </section>
 
-<!-- Solution -->
-<section class="solution" id="solucion">
-  <div class="solution-split">
-    <div class="solution-photo">
-      <img src="project/assets/group-versus.jpg" alt="Comunidad de un box afiliado a Training Norte">
-      <div class="photo-tag">★ Comunidad TN</div>
+<!-- Solution / Why -->
+<section class="section why-section" id="solucion">
+  <div class="section-head">
+    <h2>¿Por qué escoger <span class="hl">TN BOX</span> para tu centro?</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><rect x="7" y="14" width="3" height="3"/><rect x="14" y="14" width="3" height="3"/></svg>
+      </div>
+      <div class="why-ttl">Sin lesiones, más progreso</div>
+      <p class="why-desc">Tus alumnos vienen a mejorar su calidad de vida, y la clave para lograrlo es optimizar su calidad de movimiento. Un atleta con dolor abandona el box. Un atleta lesionado no solo se va, sino que puede dañar la reputación de tu centro y de tu equipo. Por eso, hemos creado una estructura única diseñada para mantener a tus deportistas en constante progreso y libres de lesiones. Tus entrenadores recibirán una guía diaria que les ayudará a mejorar la postura y los rangos de movimiento de cada atleta, logrando que incluso los movimientos más complejos sean accesibles para todos. ¡Progreso seguro, sin limitaciones!</p>
     </div>
-    <div class="solution-body">
-      <div class="eyebrow">La solución</div>
-      <h2>Una estructura única para mantener a tus deportistas en <strong>progreso constante</strong> y libres de lesiones.</h2>
-      <div class="sol-items">
-        <div class="sol-item">
-          <div class="si-mark"><span>✓</span></div>
-          <div class="si-body">
-            <div class="si-ttl">Sin lesiones, más progreso</div>
-            <div class="si-desc">Hemos creado una estructura única diseñada para mantener a tus deportistas en constante progreso y libres de lesiones. Tus entrenadores recibirán una guía diaria que les ayudará a mejorar la postura y los rangos de movimiento de cada atleta, logrando que incluso los movimientos más complejos sean accesibles para todos.</div>
-          </div>
-        </div>
-        <div class="sol-item">
-          <div class="si-mark"><span>✓</span></div>
-          <div class="si-body">
-            <div class="si-ttl">Hasta 4 niveles por día</div>
-            <div class="si-desc">Nuestra programación ofrece hasta cuatro niveles diarios que se integran en la misma clase, asegurando que cada uno reciba el entrenamiento que necesita y pueda progresar a su ritmo, facilitando el trabajo a todo tu equipo.</div>
-          </div>
-        </div>
-        <div class="sol-item">
-          <div class="si-mark"><span>✓</span></div>
-          <div class="si-body">
-            <div class="si-ttl">Coaching que evoluciona</div>
-            <div class="si-desc">No te damos una programación y ya está. Nos involucramos al 100% con tu box. Recibirás herramientas y recomendaciones detalladas, tanto en texto como en vídeo, para que tu equipo no solo entrene mejor, sino también enseñe mejor.</div>
-          </div>
-        </div>
-        <div class="sol-item">
-          <div class="si-mark"><span>✓</span></div>
-          <div class="si-body">
-            <div class="si-ttl">Programación con respaldo científico</div>
-            <div class="si-desc">Nuestra programación no solo está diseñada para ser eficaz, sino también segura y basada en evidencia científica. Cada entrenamiento está respaldado por estudios y probado en la práctica, lo que asegura resultados medibles y adaptados a las necesidades de tu box.</div>
-          </div>
-        </div>
+    <div class="why-item">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
       </div>
-      <div style="margin-top:36px;">
-        <button class="btn btn-accent" onclick="scrollTo('precios')">Habla con Alba <span class="arrow">→</span></button>
+      <div class="why-ttl">Hasta 4 niveles por día</div>
+      <p class="why-desc">No todos los alumnos son iguales, y tu programación tampoco debería serlo. Sabemos que cada atleta en tu centro tiene diferentes habilidades, desde principiantes hasta los más avanzados. Por eso, nuestra programación ofrece hasta cuatro niveles diarios que se integran en la misma clase, asegurando que cada uno reciba el entrenamiento que necesita y pueda progresar a su ritmo, facilitando el trabajo a todo tu equipo. ¡Adaptación total para maximizar resultados!</p>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
       </div>
+      <div class="why-ttl">Coaching que evoluciona</div>
+      <p class="why-desc">Cada sesión tiene un objetivo claro, pero ¿cómo lo transmites? ¿En qué debe enfocarse el coach? ¿Cómo puedes sacar lo mejor de cada atleta en cada entrenamiento? No te damos una programación y ya está. Nos involucramos al 100% con tu box. Recibirás herramientas y recomendaciones detalladas, tanto en texto como en vídeo, para que tu equipo no solo entrene mejor, sino también enseñe mejor. Desde técnica hasta motivación, tendrás todo lo necesario para elevar el nivel de tus clases.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <div class="why-ttl">Programación con respaldo científico</div>
+      <p class="why-desc">Nuestra programación no solo está diseñada para ser eficaz, sino también segura y basada en evidencia científica. Cada entrenamiento está respaldado por estudios y probado en la práctica, lo que asegura resultados medibles y adaptados a las necesidades de tu box. Tus alumnos te dedican su tiempo, ilusión y esfuerzo: merecen sólo lo mejor.</p>
     </div>
   </div>
 </section>
