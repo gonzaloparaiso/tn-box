@@ -223,6 +223,15 @@
   .test-card .meta .name { font-weight: 800; font-size: 17px; margin-top: 6px; letter-spacing: -0.01em; }
   .test-card .meta .role { font-size: 13px; color: var(--fg-on-dark-dim); margin-top: 2px; }
 
+  /* Text testimonials */
+  .text-test-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; max-width: var(--maxw); margin: 40px auto 0; }
+  @media (max-width: 980px) { .text-test-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 520px) { .text-test-grid { grid-template-columns: 1fr; } }
+  .text-test-card { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 28px 24px; display: flex; flex-direction: column; gap: 16px; }
+  .text-test-card .quote { font-size: 15px; line-height: 1.65; color: var(--fg); flex: 1; font-style: italic; }
+  .text-test-card .tname { font-weight: 800; font-size: 14px; letter-spacing: -0.01em; }
+  .text-test-card .trole { font-size: 12px; color: var(--fg-dim); }
+
   /* Authority */
   .authority { background: var(--bg-dark); color: var(--fg-on-dark); overflow: hidden; }
   .auth-split { display: grid; grid-template-columns: 400px 1fr; }
@@ -344,7 +353,7 @@
 
 <!-- Promo bar -->
 <div class="promo-bar">
-  <strong>★</strong>&nbsp;&nbsp;Sin permanencia · Soporte directo del equipo TN · Programación entregada con +15 días de antelación&nbsp;&nbsp;<strong>★</strong>
+  <strong>★</strong>&nbsp;&nbsp;¡30 días de prueba GRATUITA! · Sin permanencia · Soporte y feedback 24/7 · Programación con +15 días de antelación&nbsp;&nbsp;<strong>★</strong>
 </div>
 
 <!-- Nav -->
@@ -374,14 +383,14 @@
   <div class="hero-overlay"></div>
   <div class="hero-inner">
     <div>
-      <div class="eyebrow on-dark">Programación para boxes · Desde 2014</div>
+      <div class="eyebrow on-dark">El programa #1 para boxes · Desde 2014</div>
       <h1 class="display">
-        La programación que llena tu <span class="accent">BOX.</span>
+        Potencia tu <span class="accent">BOX.</span>
       </h1>
-      <p class="sub">Una estructura única — basada en evidencia y probada por +100 boxes — para mantener a tus atletas en progreso constante, libres de lesiones, y a tu equipo de coaches enseñando mejor. Tú te dedicas a tu negocio. Nosotros, a programar.</p>
+      <p class="sub">Haz que tu BOX sea una referencia de salud y rendimiento. Gana calidad delegando la programación a profesionales con +15 años de experiencia y forma parte de una comunidad de +40 centros internacionales.</p>
       <div class="hero-ctas">
         <button class="btn btn-primary" onclick="scrollToSection('precios')">
-          Reservar llamada gratis <span class="arrow">→</span>
+          Habla con Alba <span class="arrow">→</span>
         </button>
         <button class="btn btn-ghost on-dark" onclick="scrollToSection('programas')">
           Ver programaciones
@@ -389,8 +398,8 @@
       </div>
       <div class="hero-trust">
         <div class="stat">
-          <span class="num">+100</span>
-          <span class="lbl">Boxes confían</span>
+          <span class="num">+40</span>
+          <span class="lbl">Centros internacionales</span>
         </div>
         <div class="divider"></div>
         <div class="stat">
@@ -473,35 +482,35 @@
         <div class="bullet">
           <div class="icon">✓</div>
           <div>
-            <div class="ttl">Guía diaria para tus entrenadores</div>
-            <div class="desc">Mejora la postura y los rangos de movimiento de cada atleta — los movimientos más complejos se vuelven accesibles para todos.</div>
+            <div class="ttl">Sin lesiones, más progreso</div>
+            <div class="desc">Estructura única diseñada para mantener a tus deportistas en progreso constante y libres de lesiones mediante guías de postura y rangos de movimiento.</div>
           </div>
         </div>
         <div class="bullet">
           <div class="icon">✓</div>
           <div>
-            <div class="ttl">Cada sesión con un objetivo claro</div>
-            <div class="desc">Recibirás herramientas y recomendaciones detalladas — texto y vídeo — para que tu equipo entrene mejor y enseñe mejor.</div>
+            <div class="ttl">Hasta 4 niveles por día</div>
+            <div class="desc">Programación adaptada a diferentes habilidades: desde principiantes hasta avanzados, integrada en la misma clase para que nadie se quede atrás.</div>
           </div>
         </div>
         <div class="bullet">
           <div class="icon">✓</div>
           <div>
-            <div class="ttl">Eficaz, segura y basada en evidencia</div>
-            <div class="desc">Cada entrenamiento está respaldado por estudios y probado en la práctica. Resultados medibles, adaptados a las necesidades de tu box.</div>
+            <div class="ttl">Coaching que evoluciona</div>
+            <div class="desc">Herramientas y recomendaciones detalladas en texto y vídeo para que tu equipo no solo entrene mejor, sino también enseñe mejor.</div>
           </div>
         </div>
         <div class="bullet">
           <div class="icon">✓</div>
           <div>
-            <div class="ttl">Nos involucramos al 100% con tu box</div>
-            <div class="desc">No te damos una programación y ya está. Desde técnica hasta motivación, tendrás todo para elevar el nivel de tus clases.</div>
+            <div class="ttl">Programación con respaldo científico</div>
+            <div class="desc">Cada entrenamiento está respaldado por estudios y probado en la práctica, lo que asegura resultados medibles y adaptados a las necesidades de tu box.</div>
           </div>
         </div>
       </div>
       <div style="margin-top: 40px;">
         <button class="btn btn-dark" onclick="scrollToSection('precios')">
-          Reservar llamada gratis <span class="arrow">→</span>
+          Habla con Alba <span class="arrow">→</span>
         </button>
       </div>
     </div>
@@ -671,6 +680,28 @@
       </div>
     </div>
   </div>
+  <div class="text-test-grid">
+    <div class="text-test-card">
+      <p class="quote">"Después de más de un año trabajando con la programación… no recuerdo ninguna lesión entrenando de los atletas."</p>
+      <div class="tname">Carlos</div>
+      <div class="trole">CrossTraining Parla</div>
+    </div>
+    <div class="text-test-card">
+      <p class="quote">"Grandes mejoras en los atletas, tanto a nivel de fitness como en movilidad y postura."</p>
+      <div class="tname">Rebeca</div>
+      <div class="trole">CrossFit Greywolves</div>
+    </div>
+    <div class="text-test-card">
+      <p class="quote">"El 95% de las clases de prueba se quedan. Alba entiende que el deporte y la salud deben ir de la mano."</p>
+      <div class="tname">Ambit Fitness</div>
+      <div class="trole">Petrer, Alicante</div>
+    </div>
+    <div class="text-test-card">
+      <p class="quote">"Tener la planificación de Training Norte significa tranquilidad y nos aporta tiempo valioso."</p>
+      <div class="tname">Verum CrossFit</div>
+      <div class="trole">Box afiliado TN</div>
+    </div>
+  </div>
 </section>
 
 <!-- Community Map -->
@@ -758,73 +789,66 @@
 <!-- Pricing -->
 <section class="block pricing" id="precios">
   <div class="block-head">
-    <div class="eyebrow">Planes y precios</div>
-    <h2 class="display">El precio de un café <br>por una clase mejor.</h2>
+    <div class="eyebrow">Planes</div>
+    <h2 class="display">Encontramos juntos el mejor <br>plan para tu BOX.</h2>
     <p class="lead">
-      Sin permanencia. Empieza este mes, cancela cuando quieras. El coste por atleta es ridículo
-      frente al tiempo que liberas y la retención que ganas.
+      Hablamos, resolvemos tus dudas e inicias tu prueba de <strong>30 días GRATIS</strong> para que tu comunidad sea quien valide la programación. Sin permanencia.
     </p>
   </div>
   <div class="price-grid">
     <div class="price-card">
-      <div class="plan">Plan Esencial</div>
+      <div class="plan">Para boxes de CrossFit</div>
       <div class="name">TN BOX</div>
       <div class="price">
-        <span class="amount">Desde 89€</span>
-        <span class="per">/ mes</span>
+        <span class="amount">30 días gratis</span>
       </div>
       <ul>
-        <li>Programación TN BOX semanal con +15 días de antelación</li>
-        <li>Guía detallada para coaches</li>
-        <li>Vídeos explicativos de cada sesión</li>
+        <li>Programación semanal con +15 días de antelación</li>
+        <li>Guía detallada para coaches (texto y vídeo)</li>
         <li>Adaptaciones por nivel (RX / Scaled / Intro)</li>
-        <li>Soporte por email</li>
+        <li>Soporte y feedback 24/7</li>
       </ul>
       <div class="cta-wrap">
         <button class="btn btn-dark" onclick="scrollToSection('precios')" style="width:100%;justify-content:center;">
-          Empezar ahora <span class="arrow">→</span>
+          Habla con Alba <span class="arrow">→</span>
         </button>
       </div>
     </div>
     <div class="price-card featured">
       <div class="badge">★ Más elegido</div>
-      <div class="plan">Más popular</div>
-      <div class="name">TN BOX Pro</div>
+      <div class="plan">Pack completo</div>
+      <div class="name">TN BOX+</div>
       <div class="price">
-        <span class="amount">Desde 149€</span>
-        <span class="per">/ mes</span>
+        <span class="amount">30 días gratis</span>
       </div>
       <ul>
-        <li>Todo lo del plan Esencial</li>
-        <li>+ Accesorios y Gimnásticos</li>
-        <li>+ Halterofilia y Powerbuilding</li>
-        <li>Soporte directo con el equipo TN</li>
+        <li>Todo lo del TN BOX</li>
+        <li>+ Accesorios, Gimnásticos, Halterofilia</li>
+        <li>+ Powerbuilding, Endurance, Hyrox, Landmine</li>
+        <li>Acceso a afiliados y comunidad TN</li>
         <li>Onboarding personalizado de tu box</li>
-        <li>Formación continua para coaches</li>
       </ul>
       <div class="cta-wrap">
         <button class="btn btn-primary" onclick="scrollToSection('precios')" style="width:100%;justify-content:center;">
-          Empezar ahora <span class="arrow">→</span>
+          Habla con Alba <span class="arrow">→</span>
         </button>
       </div>
     </div>
     <div class="price-card">
-      <div class="plan">Plan completo</div>
-      <div class="name">TN BOX Elite</div>
+      <div class="plan">Para centros funcionales</div>
+      <div class="name">FUNCIONAL</div>
       <div class="price">
-        <span class="amount">Desde 219€</span>
-        <span class="per">/ mes</span>
+        <span class="amount">30 días gratis</span>
       </div>
       <ul>
-        <li>Todo lo del plan Pro</li>
-        <li>+ Endurance, Hyrox y Landmine</li>
-        <li>Acceso a las 8 programaciones</li>
-        <li>Consultoría mensual 1:1</li>
-        <li>Prioridad absoluta en soporte</li>
+        <li>Programación adaptada a centros funcionales especializados</li>
+        <li>Guía y vídeos explicativos</li>
+        <li>Soporte directo con el equipo TN</li>
+        <li>Cuéntanos tu caso y te ayudamos</li>
       </ul>
       <div class="cta-wrap">
         <button class="btn btn-dark" onclick="scrollToSection('precios')" style="width:100%;justify-content:center;">
-          Empezar ahora <span class="arrow">→</span>
+          Cuéntanos tu caso <span class="arrow">→</span>
         </button>
       </div>
     </div>
@@ -898,16 +922,15 @@
 <!-- Final CTA -->
 <section class="final-cta">
   <div class="eyebrow on-yellow" style="color: var(--accent-fg);">Da el siguiente paso</div>
-  <h2 class="display" style="margin-top: 20px;">Tus alumnos te dedican <br>tiempo, ilusión y esfuerzo. <br>Merecen sólo lo mejor.</h2>
+  <h2 class="display" style="margin-top: 20px;">Haz que tu BOX sea una referencia <br>de salud y rendimiento.</h2>
   <p class="sub">
-    Reserva una llamada de 20 minutos. Te contamos exactamente cómo encaja TN BOX en tu centro
-    y resolvemos cualquier duda — sin compromiso.
+    Hablamos, resolvemos tus dudas e inicias tu prueba de 30 días GRATIS para que tu comunidad sea quien valide la programación.
   </p>
   <div class="ctas">
-    <button class="btn btn-dark" onclick="scrollToSection('precios')">Reservar llamada gratis <span class="arrow">→</span></button>
-    <button class="btn btn-ghost" onclick="scrollToSection('programas')">Ver programaciones</button>
+    <button class="btn btn-dark" onclick="scrollToSection('precios')">Habla con Alba <span class="arrow">→</span></button>
+    <button class="btn btn-ghost" onclick="scrollToSection('precios')">Te llamamos</button>
   </div>
-  <div class="guarantee">★ Sin permanencia · Cancela cuando quieras ★</div>
+  <div class="guarantee">★ 30 días de prueba gratuita · Sin permanencia ★</div>
 </section>
 
 <!-- Footer -->
