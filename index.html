@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Programación para Boxes – Soporte 24/7 | Training Norte</title>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1467225014834244');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></noscript>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -84,12 +98,6 @@
   .hero-stat .n { font-size: clamp(36px, 4vw, 52px); font-weight: 900; color: var(--accent); line-height: 1; letter-spacing: -0.03em; }
   .hero-stat .l { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 6px; }
 
-  /* ─── BOXES STRIP ─── */
-  .boxes-strip { background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 20px 40px; }
-  .boxes-strip-inner { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; justify-content: space-between; }
-  .boxes-strip .label { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-mute); white-space: nowrap; }
-  .boxes-strip .names { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; }
-  .boxes-strip .name { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-dim); }
 
   /* ─── SECTION BASE ─── */
   .section { padding: 112px 40px; }
@@ -339,11 +347,6 @@
     .hero-stat { border-right: none; margin-right: 0; padding-right: 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; }
     .hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
 
-    /* Boxes strip: tighter on mobile */
-    .boxes-strip { padding: 16px 20px; }
-    .boxes-strip-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .boxes-strip .names { gap: 14px; }
-
     /* Spotlight cards body */
     .spot-card-body { padding: 20px 20px 28px; }
     .spot-cta { margin-top: 36px; }
@@ -394,8 +397,6 @@
     /* Steps already 1-col via existing query, just tighten padding */
     .step { padding: 28px 20px; }
 
-    /* Promo strip: wrap nicely */
-    .boxes-strip .names { flex-wrap: wrap; gap: 10px 16px; }
   }
 
   /* ─── MODAL ─── */
@@ -444,21 +445,6 @@
     </div>
   </div>
 </section>
-
-<!-- Boxes strip -->
-<div class="boxes-strip">
-  <div class="boxes-strip-inner">
-    <div class="label">+40 centros en España y Latinoamérica</div>
-    <div class="names">
-      <div class="name">Versus CrossFit</div>
-      <div class="name">Ambit Fitness</div>
-      <div class="name">CrossFit Mataró</div>
-      <div class="name">Artic Box</div>
-      <div class="name">Púlsar CrossFit</div>
-      <div class="name">YoinBox</div>
-    </div>
-  </div>
-</div>
 
 <!-- Video -->
 <section class="video-showcase" onclick="toggleShowcase(this)">
@@ -898,10 +884,23 @@
     video.addEventListener('pause', () => { if (video.ended) return; card.classList.remove('playing'); video.controls = false; }, { once: true });
   }
 
+  // ─── UTMs ───
+  const _utms = (function() {
+    const p = new URLSearchParams(window.location.search);
+    return {
+      utm_source:   p.get('utm_source')   || '(directo)',
+      utm_medium:   p.get('utm_medium')   || '(none)',
+      utm_campaign: p.get('utm_campaign') || '(none)',
+      utm_content:  p.get('utm_content')  || '(none)',
+      utm_term:     p.get('utm_term')     || '(none)'
+    };
+  })();
+
   // ─── MODAL ───
   function openModal() {
     document.getElementById('contact-modal').classList.add('open');
     document.body.style.overflow = 'hidden';
+    if (typeof fbq !== 'undefined') fbq('track', 'Lead');
   }
   function closeModal() {
     document.getElementById('contact-modal').classList.remove('open');
@@ -915,10 +914,15 @@
     btn.disabled = true;
     btn.textContent = 'Enviando…';
     const data = {
-      name:    document.getElementById('m-name').value,
-      phone:   document.getElementById('m-phone').value,
-      email:   document.getElementById('m-email').value,
-      _subject: 'Nueva consulta – TN BOX Landing'
+      name:     document.getElementById('m-name').value,
+      phone:    document.getElementById('m-phone').value,
+      email:    document.getElementById('m-email').value,
+      '— UTM source':   _utms.utm_source,
+      '— UTM medium':   _utms.utm_medium,
+      '— UTM campaign': _utms.utm_campaign,
+      '— UTM content':  _utms.utm_content,
+      '— UTM term':     _utms.utm_term,
+      _subject: 'Nueva consulta – TN BOX Landing [' + _utms.utm_campaign + ' / ' + _utms.utm_source + ']'
     };
     try {
       const res = await fetch('https://formsubmit.co/ajax/info@trainingnorte.com', {
