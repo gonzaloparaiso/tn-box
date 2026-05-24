@@ -347,6 +347,30 @@
   @media (max-width: 720px) { .mobile-sticky { display: flex; } body { padding-bottom: 64px; } }
   .mobile-sticky .lbl { font-weight: 700; font-size: 13px; flex: 1; line-height: 1.2; }
   .mobile-sticky .btn { padding: 10px 14px; background: var(--accent-fg); color: var(--accent); border-radius: 4px; font-weight: 700; font-size: 13px; border-color: var(--accent-fg); box-shadow: none; }
+
+  /* ─── MODAL ─── */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal-box { background: #111; border-radius: 12px; width: 100%; max-width: 640px; padding: 52px 48px 48px; position: relative; transform: translateY(20px); transition: transform .3s ease; }
+  .modal-overlay.open .modal-box { transform: translateY(0); }
+  @media (max-width: 600px) { .modal-box { padding: 44px 24px 36px; } }
+  .modal-close { position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; display: grid; place-items: center; font-size: 22px; color: rgba(255,255,255,0.5); cursor: pointer; background: none; border: none; transition: color .15s; }
+  .modal-close:hover { color: #fff; }
+  .modal-title { font-size: clamp(36px, 5vw, 52px); font-weight: 900; color: var(--accent); text-align: center; letter-spacing: -0.02em; }
+  .modal-sub { font-size: 16px; color: rgba(255,255,255,0.55); text-align: center; margin-top: 12px; line-height: 1.55; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .modal-fields { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+  .modal-input { width: 100%; padding: 16px 20px; border-radius: 8px; border: none; font: inherit; font-size: 16px; background: #fff; color: #111; outline: none; }
+  .modal-input::placeholder { color: #999; }
+  .modal-check { display: flex; gap: 12px; align-items: flex-start; margin-top: 6px; font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.55; }
+  .modal-check input { flex-shrink: 0; margin-top: 3px; accent-color: var(--accent); width: 15px; height: 15px; }
+  .modal-check a { color: var(--accent); text-decoration: underline; }
+  .modal-submit { margin-top: 20px; width: 100%; padding: 18px; background: var(--accent); color: var(--accent-fg); font: inherit; font-weight: 900; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; border: none; border-radius: 8px; cursor: pointer; transition: background .18s; }
+  .modal-submit:hover { background: #d9a82e; }
+  .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .modal-success { display: none; text-align: center; padding: 20px 0; }
+  .modal-success .ok-icon { font-size: 52px; margin-bottom: 16px; }
+  .modal-success h3 { font-size: 26px; font-weight: 900; color: var(--accent); }
+  .modal-success p { color: rgba(255,255,255,0.55); margin-top: 10px; font-size: 15px; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -371,7 +395,7 @@
       <a href="#precios">Precios</a>
       <a href="#faq">FAQ</a>
     </div>
-    <button class="btn btn-primary" onclick="scrollToSection('precios')">
+    <button class="btn btn-primary" onclick="openModal()">
       Reservar llamada gratis <span class="arrow">→</span>
     </button>
   </div>
@@ -389,7 +413,7 @@
       </h1>
       <p class="sub">Haz que tu BOX sea una referencia de salud y rendimiento. Gana calidad delegando tu programación a profesionales con +15 años de experiencia, forma parte de una comunidad de +40 centros internacionales y recibe el soporte y feedback que necesitas 24/7.</p>
       <div class="hero-ctas">
-        <button class="btn btn-primary" onclick="scrollToSection('precios')">
+        <button class="btn btn-primary" onclick="openModal()">
           Habla con Alba <span class="arrow">→</span>
         </button>
         <button class="btn btn-ghost on-dark" onclick="scrollToSection('programas')">
@@ -509,7 +533,7 @@
         </div>
       </div>
       <div style="margin-top: 40px;">
-        <button class="btn btn-dark" onclick="scrollToSection('precios')">
+        <button class="btn btn-dark" onclick="openModal()">
           Habla con Alba <span class="arrow">→</span>
         </button>
       </div>
@@ -809,7 +833,7 @@
         <li>Soporte y feedback 24/7</li>
       </ul>
       <div class="cta-wrap">
-        <button class="btn btn-dark" onclick="scrollToSection('precios')" style="width:100%;justify-content:center;">
+        <button class="btn btn-dark" onclick="openModal()" style="width:100%;justify-content:center;">
           Habla con Alba <span class="arrow">→</span>
         </button>
       </div>
@@ -829,7 +853,7 @@
         <li>Onboarding personalizado de tu box</li>
       </ul>
       <div class="cta-wrap">
-        <button class="btn btn-primary" onclick="scrollToSection('precios')" style="width:100%;justify-content:center;">
+        <button class="btn btn-primary" onclick="openModal()" style="width:100%;justify-content:center;">
           Habla con Alba <span class="arrow">→</span>
         </button>
       </div>
@@ -847,7 +871,7 @@
         <li>Cuéntanos tu caso y te ayudamos</li>
       </ul>
       <div class="cta-wrap">
-        <button class="btn btn-dark" onclick="scrollToSection('precios')" style="width:100%;justify-content:center;">
+        <button class="btn btn-dark" onclick="openModal()" style="width:100%;justify-content:center;">
           Cuéntanos tu caso <span class="arrow">→</span>
         </button>
       </div>
@@ -927,8 +951,8 @@
     Hablamos, resolvemos tus dudas e inicias tu prueba de 30 días GRATIS para que tu comunidad sea quien valide la programación.
   </p>
   <div class="ctas">
-    <button class="btn btn-dark" onclick="scrollToSection('precios')">Habla con Alba <span class="arrow">→</span></button>
-    <button class="btn btn-ghost" onclick="scrollToSection('precios')">Te llamamos</button>
+    <button class="btn btn-dark" onclick="openModal()">Habla con Alba <span class="arrow">→</span></button>
+    <button class="btn btn-ghost" onclick="openModal()">Te llamamos</button>
   </div>
   <div class="guarantee">★ 30 días de prueba gratuita · Sin permanencia ★</div>
 </section>
@@ -973,7 +997,7 @@
 <!-- Sticky mobile CTA -->
 <div class="mobile-sticky">
   <div class="lbl">¿Listo para empezar?</div>
-  <button class="btn" onclick="scrollToSection('precios')">Reservar llamada gratis →</button>
+  <button class="btn" onclick="openModal()">Reservar llamada gratis →</button>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -1078,6 +1102,72 @@
       video.controls = false;
     }, { once: true });
   }
+
+  // ─── MODAL ───
+  function openModal() {
+    document.getElementById('contact-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('contact-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  async function submitContactForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('modal-send-btn');
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+    const data = {
+      name:    document.getElementById('m-name').value,
+      phone:   document.getElementById('m-phone').value,
+      email:   document.getElementById('m-email').value,
+      _subject: 'Nueva consulta – TN BOX Landing'
+    };
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/info@trainingnorte.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        document.getElementById('modal-form-wrap').style.display = 'none';
+        document.getElementById('modal-success').style.display = 'block';
+      } else { throw new Error(); }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'ENVIAR';
+      alert('Ha habido un error. Por favor, inténtalo de nuevo.');
+    }
+  }
 </script>
+
+<!-- Contact Modal -->
+<div class="modal-overlay" id="contact-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">✕</button>
+    <div id="modal-form-wrap">
+      <div class="modal-title">Te llamamos</div>
+      <div class="modal-sub">Déjanos tus datos y encontramos juntos la mejor opción para tu centro</div>
+      <form class="modal-fields" onsubmit="submitContactForm(event)">
+        <input id="m-name"  class="modal-input" type="text"  name="name"  placeholder="Nombre completo"        required>
+        <input id="m-phone" class="modal-input" type="tel"   name="phone" placeholder="Teléfono (Con Whatsapp)" required>
+        <input id="m-email" class="modal-input" type="email" name="email" placeholder="Tu mejor Email"          required>
+        <label class="modal-check">
+          <input type="checkbox" required>
+          Acepto recibir comunicaciones comerciales de Training Norte SCG. Entiendo que mis datos se procesarán de acuerdo a la <a href="https://trainingnorte.com/politica-de-privacidad/" target="_blank">política de privacidad</a> de este sitio. Puede darse de baja en cualquier momento.
+        </label>
+        <button id="modal-send-btn" class="modal-submit" type="submit">ENVIAR</button>
+      </form>
+    </div>
+    <div class="modal-success" id="modal-success">
+      <div class="ok-icon">✅</div>
+      <h3>¡Recibido!</h3>
+      <p>Nos ponemos en contacto contigo en las próximas horas.<br>¡Gracias por confiar en Training Norte!</p>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
