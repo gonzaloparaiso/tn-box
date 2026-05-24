@@ -264,6 +264,15 @@
   .final-note { margin-top: 28px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
 
   /* ─── COMMUNITY MAP ─── */
+  /* Text testimonials */
+  .text-test-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; max-width: var(--max-w); margin: 40px auto 0; padding: 0 24px; }
+  @media (max-width: 980px) { .text-test-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 520px) { .text-test-grid { grid-template-columns: 1fr; } }
+  .text-test-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 28px 24px; display: flex; flex-direction: column; gap: 16px; }
+  .text-test-card .quote { font-size: 15px; line-height: 1.65; color: #333; flex: 1; font-style: italic; }
+  .text-test-card .tname { font-weight: 800; font-size: 14px; letter-spacing: -0.01em; color: #111; }
+  .text-test-card .trole { font-size: 12px; color: #888; }
+
   .comunidad { background: #0a0a0a; color: #fff; padding: 80px 0 0; }
   .com-head { max-width: var(--maxw); margin: 0 auto; padding: 0 40px 48px; }
   .com-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); display: inline-flex; align-items: center; gap: 8px; }
@@ -316,7 +325,7 @@
 <body>
 
 <!-- Promo -->
-<div class="promo">Sin permanencia · Soporte 24/7 · Programación entregada con +15 días de antelación</div>
+<div class="promo">¡30 días de prueba GRATUITA! · Sin permanencia · Soporte y feedback 24/7 · Programación con +15 días de antelación</div>
 
 <!-- Nav -->
 <nav>
@@ -396,6 +405,12 @@
       <div class="f-line"></div>
       <div class="f-ttl">Coaching que evoluciona</div>
       <div class="f-desc">Herramientas y recomendaciones detalladas en texto y vídeo para que tu equipo no solo entrene mejor, sino también enseñe mejor cada día.</div>
+    </div>
+    <div class="feat">
+      <div class="f-num">04</div>
+      <div class="f-line"></div>
+      <div class="f-ttl">Programación con respaldo científico</div>
+      <div class="f-desc">Cada entrenamiento está respaldado por estudios y probado en la práctica, lo que asegura resultados medibles y adaptados a las necesidades de tu box.</div>
     </div>
   </div>
 </section>
@@ -520,6 +535,28 @@
       <div class="overlay"></div>
       <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="meta"><div class="stars">★★★★★</div><div class="tname">Michel y Mateo</div><div class="trole">Versus Crossfit</div></div>
+    </div>
+  </div>
+  <div class="text-test-grid">
+    <div class="text-test-card">
+      <p class="quote">"Después de más de un año trabajando con la programación… no recuerdo ninguna lesión entrenando de los atletas."</p>
+      <div class="tname">Carlos</div>
+      <div class="trole">CrossTraining Parla</div>
+    </div>
+    <div class="text-test-card">
+      <p class="quote">"Grandes mejoras en los atletas, tanto a nivel de fitness como en movilidad y postura."</p>
+      <div class="tname">Rebeca</div>
+      <div class="trole">CrossFit Greywolves</div>
+    </div>
+    <div class="text-test-card">
+      <p class="quote">"El 95% de las clases de prueba se quedan. Alba entiende que el deporte y la salud deben ir de la mano."</p>
+      <div class="tname">Ambit Fitness</div>
+      <div class="trole">Petrer, Alicante</div>
+    </div>
+    <div class="text-test-card">
+      <p class="quote">"Tener la planificación de Training Norte significa tranquilidad y nos aporta tiempo valioso."</p>
+      <div class="tname">Verum CrossFit</div>
+      <div class="trole">Box afiliado TN</div>
     </div>
   </div>
 </section>
