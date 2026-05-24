@@ -276,7 +276,7 @@
 
   /* ─── COMMUNITY MAP ─── */
   /* Text testimonials */
-  .text-test-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; max-width: var(--max-w); margin: 40px auto 0; padding: 0 24px; }
+  .text-test-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; max-width: var(--maxw); margin: 40px auto 0; padding: 0 24px; }
   @media (max-width: 980px) { .text-test-grid { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 520px) { .text-test-grid { grid-template-columns: 1fr; } }
   .text-test-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 28px 24px; display: flex; flex-direction: column; gap: 16px; }
@@ -331,6 +331,72 @@
   @media (max-width: 720px) { .sticky-bar { display: flex; } body { padding-bottom: 60px; } }
   .sticky-bar .sl { font-size: 12px; font-weight: 700; flex: 1; line-height: 1.2; }
   .sticky-bar .sb { padding: 9px 16px; background: var(--accent); color: var(--accent-fg); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+
+  /* ─── MOBILE RESPONSIVE FIXES ─── */
+  @media (max-width: 720px) {
+    /* Hero stats: stack vertically */
+    .hero-stats { flex-direction: column; gap: 20px; padding-top: 28px; margin-top: 36px; }
+    .hero-stat { border-right: none; margin-right: 0; padding-right: 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; }
+    .hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
+
+    /* Boxes strip: tighter on mobile */
+    .boxes-strip { padding: 16px 20px; }
+    .boxes-strip-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .boxes-strip .names { gap: 14px; }
+
+    /* Spotlight cards body */
+    .spot-card-body { padding: 20px 20px 28px; }
+    .spot-cta { margin-top: 36px; }
+
+    /* Auth photo: reduce fixed height */
+    .auth-photo { min-height: 320px; padding-top: 48px; }
+
+    /* Auth creds: single column on very small */
+    .auth-creds { grid-template-columns: 1fr; }
+
+    /* Community section */
+    .comunidad { padding: 56px 0 0; }
+
+    /* Why grid: reduce gap */
+    .why-grid { gap: 28px; }
+
+    /* Programs grid: 1 column on mobile */
+    .programs-grid { grid-template-columns: 1fr; }
+
+    /* Testimonial grid: 1 column on mobile */
+    .test-grid { grid-template-columns: 1fr; }
+    .test-card { aspect-ratio: 16/9; }
+
+    /* Text testimonials */
+    .text-test-grid { padding: 0 20px; }
+
+    /* Pricing cards full width */
+    .price-cards { max-width: 100%; }
+
+    /* Spotlight: full width */
+    .spot-cards { max-width: 100%; }
+
+    /* Final section padding */
+    .final { padding: 80px 20px; }
+
+    /* Section head margins */
+    .section-head { margin-bottom: 48px; }
+  }
+
+  @media (max-width: 480px) {
+    /* Hero font tightening */
+    .hero-content { padding: 0 20px 48px; }
+
+    /* Auth creds single col */
+    .auth-creds { grid-template-columns: 1fr; gap: 8px; }
+    .cred .cv { font-size: 26px; }
+
+    /* Steps already 1-col via existing query, just tighten padding */
+    .step { padding: 28px 20px; }
+
+    /* Promo strip: wrap nicely */
+    .boxes-strip .names { flex-wrap: wrap; gap: 10px 16px; }
+  }
 
   /* ─── MODAL ─── */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
