@@ -379,6 +379,9 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
     /* Testimonial grid: 1 column on mobile */
     .test-grid { grid-template-columns: 1fr; }
     .test-card { aspect-ratio: 16/9; }
+    .test-card video { object-position: center 15%; }
+    .test-card:nth-child(2) video { object-position: center 10%; } /* Chema */
+    .test-card:nth-child(3) video { object-position: center 10%; } /* Gorobel */
 
     /* Text testimonials */
     .text-test-grid { padding: 0 20px; }
@@ -888,7 +891,16 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
       video.pause(); card.classList.remove('playing');
     } else {
       document.querySelectorAll('.test-card.playing').forEach(c => { c.querySelector('video').pause(); c.classList.remove('playing'); });
-      video.play().then(() => { card.classList.add('playing'); video.controls = true; }).catch(() => {});
+      video.play().then(() => {
+        card.classList.add('playing');
+        video.controls = true;
+        // Fullscreen on mobile
+        if (window.innerWidth <= 720) {
+          if (video.requestFullscreen) video.requestFullscreen();
+          else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
+          else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen(); // iOS Safari
+        }
+      }).catch(() => {});
     }
     video.addEventListener('ended', () => { card.classList.remove('playing'); video.controls = false; }, { once: true });
     video.addEventListener('pause', () => { if (video.ended) return; card.classList.remove('playing'); video.controls = false; }, { once: true });
