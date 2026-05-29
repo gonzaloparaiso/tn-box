@@ -964,7 +964,13 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
       if (!fieldOk) ok = false;
     }
     const consent = document.getElementById('m-consent');
-    if (!consent.checked) { ok = false; }
+    const consentErr = document.getElementById('err-consent');
+    if (!consent.checked) {
+      consentErr.classList.add('show');
+      ok = false;
+    } else {
+      consentErr.classList.remove('show');
+    }
     return ok;
   }
   // Blur listeners for real-time feedback
@@ -1031,10 +1037,13 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
           <input id="m-email" class="modal-input" type="email" name="email" placeholder="Tu mejor email" autocomplete="email">
           <span class="field-error" id="err-email">Introduce un email válido</span>
         </div>
-        <label class="modal-check">
-          <input type="checkbox" id="m-consent">
-          Acepto recibir comunicaciones comerciales de Training Norte SCG. Entiendo que mis datos se procesarán de acuerdo a la <a href="https://trainingnorte.com/politica-de-privacidad/" target="_blank">política de privacidad</a> de este sitio. Puede darse de baja en cualquier momento.
-        </label>
+        <div class="field-wrap">
+          <label class="modal-check">
+            <input type="checkbox" id="m-consent">
+            Acepto recibir comunicaciones comerciales de Training Norte SCG. Entiendo que mis datos se procesarán de acuerdo a la <a href="https://trainingnorte.com/politica-de-privacidad/" target="_blank">política de privacidad</a> de este sitio. Puede darse de baja en cualquier momento.
+          </label>
+          <span class="field-error" id="err-consent">Debes aceptar la política de privacidad para continuar</span>
+        </div>
         <button id="modal-send-btn" class="modal-submit" type="submit">ENVIAR</button>
       </form>
     </div>
