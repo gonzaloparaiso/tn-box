@@ -294,13 +294,16 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
 
   /* ─── COMMUNITY MAP ─── */
   /* Text testimonials */
-  .text-test-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; max-width: var(--maxw); margin: 40px auto 0; padding: 0 24px; }
+  .text-testimonials { background: var(--dark); }
+  .text-test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: var(--maxw); margin: 0 auto; }
   @media (max-width: 980px) { .text-test-grid { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 520px) { .text-test-grid { grid-template-columns: 1fr; } }
-  .text-test-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 28px 24px; display: flex; flex-direction: column; gap: 16px; }
-  .text-test-card .quote { font-size: 15px; line-height: 1.65; color: #333; flex: 1; font-style: italic; }
-  .text-test-card .tname { font-weight: 800; font-size: 14px; letter-spacing: -0.01em; color: #111; }
-  .text-test-card .trole { font-size: 12px; color: #888; }
+  .text-test-card { background: #161616; border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 32px 28px; display: flex; flex-direction: column; gap: 20px; }
+  .text-test-card .tt-quote-mark { font-size: 48px; line-height: 1; color: var(--accent); font-family: Georgia, serif; margin-bottom: -8px; }
+  .text-test-card .quote { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.75); flex: 1; }
+  .text-test-card .tt-author { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px; }
+  .text-test-card .tname { font-weight: 800; font-size: 14px; letter-spacing: -0.01em; color: #fff; }
+  .text-test-card .trole { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 3px; font-family: "JetBrains Mono", monospace; letter-spacing: 0.06em; text-transform: uppercase; }
 
   .comunidad { background: #0a0a0a; color: #fff; padding: 80px 0 0; }
   .com-head { max-width: var(--maxw); margin: 0 auto; padding: 0 40px 48px; }
@@ -383,7 +386,7 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
     .test-card:nth-child(3) video { object-position: center 22%; } /* Gorobel */
 
     /* Text testimonials */
-    .text-test-grid { padding: 0 20px; }
+    .text-test-grid { grid-template-columns: 1fr; }
 
     /* Pricing cards full width */
     .price-cards { max-width: 100%; }
@@ -604,25 +607,38 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
 </section>
 
 <!-- Text testimonials -->
-<div class="section" style="background:var(--bg);padding-top:72px;padding-bottom:72px;">
+<section class="section text-testimonials">
+  <div class="section-head">
+    <div class="eyebrow" style="color:rgba(255,255,255,0.4);">Lo que dicen los dueños de box</div>
+    <h2 style="color:#fff;">Resultados reales, <strong>en sus propias palabras.</strong></h2>
+  </div>
   <div class="text-test-grid">
     <div class="text-test-card">
-      <p class="quote">"Un trabajo muy importante de movilidad y activación que hace que me sienta muy orgulloso de poder decir que no recuerdo ninguna lesión entrenando de los atletas. Bloques bien estructurados y una clara evolución en el rendimiento deportivo a medio y largo plazo."</p>
-      <div class="tname">Carlos</div>
-      <div class="trole">CrossTraining Parla</div>
+      <div class="tt-quote-mark">"</div>
+      <p class="quote">Un trabajo muy importante de movilidad y activación que hace que me sienta muy orgulloso de poder decir que no recuerdo ninguna lesión entrenando de los atletas. Bloques bien estructurados y una clara evolución en el rendimiento deportivo a medio y largo plazo.</p>
+      <div class="tt-author">
+        <div class="tname">Carlos</div>
+        <div class="trole">CrossTraining Parla</div>
+      </div>
     </div>
     <div class="text-test-card">
-      <p class="quote">"Programación muy muy recomendable. Con el poco tiempo que llevamos hemos visto grandes mejoras en los atletas, tanto una mejora a nivel de fitness como mucha mejora de movilidad y posturales. Por no hablar del gran feedback de Alba!"</p>
-      <div class="tname">Rebeca</div>
-      <div class="trole">CrossFit Greywolves</div>
+      <div class="tt-quote-mark">"</div>
+      <p class="quote">Programación muy muy recomendable. Con el poco tiempo que llevamos hemos visto grandes mejoras en los atletas, tanto una mejora a nivel de fitness como mucha mejora de movilidad y posturales. Por no hablar del gran feedback de Alba!</p>
+      <div class="tt-author">
+        <div class="tname">Rebeca</div>
+        <div class="trole">CrossFit Greywolves</div>
+      </div>
     </div>
     <div class="text-test-card">
-      <p class="quote">"Para nosotros, tener la planificación de Training Norte significa tranquilidad. Saber que una parte muy importante del funcionamiento del box está asegurada por la calidad de la planificación de Alba. Por otro lado, nos aporta tiempo que podemos dedicar a gestionar y a ofrecer calidad a nuestros atletas."</p>
-      <div class="tname">Verum CrossFit</div>
-      <div class="trole">Box afiliado TN</div>
+      <div class="tt-quote-mark">"</div>
+      <p class="quote">Para nosotros, tener la planificación de Training Norte significa tranquilidad. Saber que una parte muy importante del funcionamiento del box está asegurada por la calidad de la planificación de Alba. Por otro lado, nos aporta tiempo que podemos dedicar a gestionar y a ofrecer calidad a nuestros atletas.</p>
+      <div class="tt-author">
+        <div class="tname">Verum CrossFit</div>
+        <div class="trole">Box afiliado TN</div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- Community Map -->
 <section class="comunidad" id="comunidad">
