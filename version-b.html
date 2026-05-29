@@ -994,10 +994,10 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
       _subject: 'Nueva consulta – TN BOX Landing [' + _utms.utm_campaign + ' / ' + _utms.utm_source + ']'
     };
     try {
-      const res = await fetch('https://formsubmit.co/ajax/info@trainingnorte.com', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify({ access_key: '3923bd73-f267-4352-90aa-b50eeb5b94a1', ...data })
       });
       if (res.ok) {
         document.getElementById('modal-form-wrap').style.display = 'none';
