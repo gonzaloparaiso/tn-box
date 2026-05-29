@@ -926,7 +926,6 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
   function openModal() {
     document.getElementById('contact-modal').classList.add('open');
     document.body.style.overflow = 'hidden';
-    if (typeof fbq !== 'undefined') fbq('track', 'Lead');
   }
   function closeModal() {
     document.getElementById('contact-modal').classList.remove('open');
@@ -1000,6 +999,7 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
         body: JSON.stringify({ access_key: '3923bd73-f267-4352-90aa-b50eeb5b94a1', ...data })
       });
       if (res.ok) {
+        if (typeof fbq !== 'undefined') fbq('track', 'Lead');
         document.getElementById('modal-form-wrap').style.display = 'none';
         document.getElementById('modal-success').style.display = 'block';
       } else { throw new Error(); }
