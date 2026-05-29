@@ -422,8 +422,13 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
   .modal-title { font-size: clamp(36px, 5vw, 52px); font-weight: 900; color: var(--accent); text-align: center; letter-spacing: -0.02em; }
   .modal-sub { font-size: 16px; color: rgba(255,255,255,0.55); text-align: center; margin-top: 12px; line-height: 1.55; max-width: 420px; margin-left: auto; margin-right: auto; }
   .modal-fields { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
-  .modal-input { width: 100%; padding: 16px 20px; border-radius: 8px; border: none; font: inherit; font-size: 16px; background: #fff; color: #111; outline: none; }
+  .modal-input { width: 100%; padding: 16px 20px; border-radius: 8px; border: 2px solid transparent; font: inherit; font-size: 16px; background: #fff; color: #111; outline: none; transition: border-color .15s; }
   .modal-input::placeholder { color: #999; }
+  .modal-input.error { border-color: #e05555; background: #fff8f8; }
+  .modal-input.valid { border-color: #4caf50; }
+  .field-wrap { display: flex; flex-direction: column; gap: 5px; }
+  .field-error { font-size: 12px; color: #e05555; padding-left: 4px; display: none; }
+  .field-error.show { display: block; }
   .modal-check { display: flex; gap: 12px; align-items: flex-start; margin-top: 6px; font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.55; }
   .modal-check input { flex-shrink: 0; margin-top: 3px; accent-color: var(--accent); width: 15px; height: 15px; }
   .modal-check a { color: var(--accent); text-decoration: underline; }
@@ -929,15 +934,58 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+  // ─── FIELD VALIDATION ───
+  const _validators = {
+    name:  { el: () => document.getElementById('m-name'),  err: () => document.getElementById('err-name'),
+             test: v => v.trim().length >= 2,              msg: 'Introduce tu nombre completo' },
+    phone: { el: () => document.getElementById('m-phone'), err: () => document.getElementById('err-phone'),
+             test: v => /^\+[1-9]\d{6,14}$/.test(v.trim()), msg: 'Formato internacional requerido · ej: +34612345678' },
+    email: { el: () => document.getElementById('m-email'), err: () => document.getElementById('err-email'),
+             test: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()), msg: 'Introduce un email válido' },
+  };
+  function _validateField(key) {
+    const { el, err, test } = _validators[key];
+    const input = el(), errEl = err(), val = input.value;
+    const ok = test(val);
+    input.classList.toggle('error', !ok);
+    input.classList.toggle('valid', ok && val.trim().length > 0);
+    errEl.classList.toggle('show', !ok && val.trim().length > 0);
+    return ok;
+  }
+  function _validateAll() {
+    let ok = true;
+    for (const key of Object.keys(_validators)) {
+      // Force show error even if empty
+      const { el, err, test } = _validators[key];
+      const input = el(), errEl = err(), val = input.value;
+      const fieldOk = test(val);
+      input.classList.toggle('error', !fieldOk);
+      input.classList.toggle('valid', fieldOk);
+      errEl.classList.toggle('show', !fieldOk);
+      if (!fieldOk) ok = false;
+    }
+    const consent = document.getElementById('m-consent');
+    if (!consent.checked) { ok = false; }
+    return ok;
+  }
+  // Blur listeners for real-time feedback
+  document.addEventListener('DOMContentLoaded', () => {
+    for (const key of Object.keys(_validators)) {
+      const input = _validators[key].el();
+      if (input) input.addEventListener('blur', () => _validateField(key));
+    }
+  });
+
   async function submitContactForm(e) {
     e.preventDefault();
+    if (!_validateAll()) return;
     const btn = document.getElementById('modal-send-btn');
     btn.disabled = true;
     btn.textContent = 'Enviando…';
     const data = {
-      name:     document.getElementById('m-name').value,
-      phone:    document.getElementById('m-phone').value,
-      email:    document.getElementById('m-email').value,
+      name:     document.getElementById('m-name').value.trim(),
+      phone:    document.getElementById('m-phone').value.trim(),
+      email:    document.getElementById('m-email').value.trim(),
       '— UTM source':   _utms.utm_source,
       '— UTM medium':   _utms.utm_medium,
       '— UTM campaign': _utms.utm_campaign,
@@ -970,12 +1018,21 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
     <div id="modal-form-wrap">
       <div class="modal-title">Te llamamos</div>
       <div class="modal-sub">Déjanos tus datos y encontramos juntos la mejor opción para tu centro</div>
-      <form class="modal-fields" onsubmit="submitContactForm(event)">
-        <input id="m-name"  class="modal-input" type="text"  name="name"  placeholder="Nombre completo"        required>
-        <input id="m-phone" class="modal-input" type="tel"   name="phone" placeholder="Teléfono (Con Whatsapp)" required>
-        <input id="m-email" class="modal-input" type="email" name="email" placeholder="Tu mejor Email"          required>
+      <form class="modal-fields" onsubmit="submitContactForm(event)" novalidate>
+        <div class="field-wrap">
+          <input id="m-name"  class="modal-input" type="text"  name="name"  placeholder="Nombre completo" autocomplete="name">
+          <span class="field-error" id="err-name">Introduce tu nombre completo</span>
+        </div>
+        <div class="field-wrap">
+          <input id="m-phone" class="modal-input" type="tel"   name="phone" placeholder="+34 612 345 678" autocomplete="tel">
+          <span class="field-error" id="err-phone">Formato internacional requerido · ej: +34612345678</span>
+        </div>
+        <div class="field-wrap">
+          <input id="m-email" class="modal-input" type="email" name="email" placeholder="Tu mejor email" autocomplete="email">
+          <span class="field-error" id="err-email">Introduce un email válido</span>
+        </div>
         <label class="modal-check">
-          <input type="checkbox" required>
+          <input type="checkbox" id="m-consent">
           Acepto recibir comunicaciones comerciales de Training Norte SCG. Entiendo que mis datos se procesarán de acuerdo a la <a href="https://trainingnorte.com/politica-de-privacidad/" target="_blank">política de privacidad</a> de este sitio. Puede darse de baja en cualquier momento.
         </label>
         <button id="modal-send-btn" class="modal-submit" type="submit">ENVIAR</button>
