@@ -1006,7 +1006,7 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
       });
       if (res.ok) {
         if (typeof fbq !== 'undefined') fbq('track', 'Lead');
-        window.parent.postMessage({ tnbox_event: 'Lead' }, 'https://trainingnorte.com');
+        window.parent.postMessage({ tnbox_event: 'Lead' }, '*');
         document.getElementById('modal-form-wrap').style.display = 'none';
         document.getElementById('modal-success').style.display = 'block';
       } else { throw new Error(); }
