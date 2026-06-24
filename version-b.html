@@ -917,6 +917,16 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
     video.addEventListener('pause', () => { if (video.ended) return; card.classList.remove('playing'); video.controls = false; }, { once: true });
   }
 
+  // ─── IFRAME AUTO-RESIZE ───
+  function _sendHeight() {
+    window.parent.postMessage({ tnbox_height: document.body.scrollHeight }, '*');
+  }
+  window.addEventListener('load', _sendHeight);
+  window.addEventListener('resize', _sendHeight);
+  if (window.ResizeObserver) {
+    new ResizeObserver(_sendHeight).observe(document.body);
+  }
+
   // ─── UTMs ───
   const _utms = (function() {
     const p = new URLSearchParams(window.location.search);
