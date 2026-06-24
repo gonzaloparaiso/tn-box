@@ -928,6 +928,7 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
   }
 
   // ─── UTMs ───
+  // Reads from iframe URL; overridable via postMessage from WordPress parent
   const _utms = (function() {
     const p = new URLSearchParams(window.location.search);
     return {
@@ -938,6 +939,16 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
       utm_term:     p.get('utm_term')     || '(none)'
     };
   })();
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.tnbox_utms) {
+      var u = e.data.tnbox_utms;
+      if (u.utm_source)   _utms.utm_source   = u.utm_source;
+      if (u.utm_medium)   _utms.utm_medium   = u.utm_medium;
+      if (u.utm_campaign) _utms.utm_campaign = u.utm_campaign;
+      if (u.utm_content)  _utms.utm_content  = u.utm_content;
+      if (u.utm_term)     _utms.utm_term     = u.utm_term;
+    }
+  });
 
   // ─── MODAL ───
   function openModal() {
@@ -1008,11 +1019,11 @@ src="https://www.facebook.com/tr?id=1467225014834244&ev=PageView&noscript=1"/></
       name:     document.getElementById('m-name').value.trim(),
       phone:    document.getElementById('m-phone').value.trim(),
       email:    document.getElementById('m-email').value.trim(),
-      '— UTM source':   _utms.utm_source,
-      '— UTM medium':   _utms.utm_medium,
-      '— UTM campaign': _utms.utm_campaign,
-      '— UTM content':  _utms.utm_content,
-      '— UTM term':     _utms.utm_term,
+      utm_source:   _utms.utm_source,
+      utm_medium:   _utms.utm_medium,
+      utm_campaign: _utms.utm_campaign,
+      utm_content:  _utms.utm_content,
+      utm_term:     _utms.utm_term,
       _subject: 'Nueva consulta – TN BOX Landing [' + _utms.utm_campaign + ' / ' + _utms.utm_source + ']'
     };
     try {
